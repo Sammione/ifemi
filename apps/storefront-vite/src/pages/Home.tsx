@@ -1,230 +1,394 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, ShoppingBag, Check, Heart } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
+import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 
 export default function Home() {
-  const { currency } = useCurrency();
+  const { formatPrice } = useCurrency();
+  const { addItem, toastMessage } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
-  const featuredCategories = [
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+
+  // Curated Signature Pieces with authentic photography and real names
+  const featuredPieces = [
+    {
+      id: '1',
+      name: 'Silk Kaftan',
+      category: 'Kaftans',
+      price: 45000,
+      priceGBP: 28,
+      sku: 'KAFTAN-BLU-001',
+      image: '/images/products/kaftan-1.jpg',
+      description: 'Mulberry silk blend with fluid drape and subtle piping.'
+    },
+    {
+      id: '2',
+      name: 'Crepe Trouser Set',
+      category: 'Trouser Sets',
+      price: 65000,
+      priceGBP: 40,
+      salePrice: 58000,
+      salePriceGBP: 36,
+      sku: 'TSET-PRP-002',
+      image: '/images/products/trouser-1.jpg',
+      description: 'High-waisted trousers with matching crossover blouse.'
+    },
+    {
+      id: '3',
+      name: 'Silk Loungewear Set',
+      category: 'Loungewear',
+      price: 35000,
+      priceGBP: 22,
+      sku: 'LNG-LAV-003',
+      image: '/images/products/loungewear-1.jpg',
+      description: 'Relaxed two-piece in lightweight washed silk.'
+    },
+    {
+      id: '5',
+      name: 'Amber & Oud Diffuser',
+      category: 'Objects',
+      price: 22000,
+      priceGBP: 15,
+      sku: 'DIF-OUD-005',
+      image: '/images/products/diffuser-1.jpg',
+      description: 'Cedarwood, agarwood, and amber resin in glass decanter.'
+    }
+  ];
+
+  const editorialCategories = [
     {
       name: 'Kaftans',
       slug: 'kaftans',
-      subtitle: 'One Size Fluid Drape (UK 8–20)',
-      image: '/images/products/kaftan-1.svg'
+      image: '/images/products/kaftan-2.jpg',
+      count: '4 Silhouettes'
     },
     {
       name: 'Trouser Sets',
       slug: 'trouser-sets',
-      subtitle: 'British-Cut Tailored Sets (XS–XXL)',
-      image: '/images/products/trouser-1.svg'
+      image: '/images/products/trouser-2.jpg',
+      count: '3 Silhouettes'
     },
     {
       name: 'Loungewear',
       slug: 'loungewear',
-      subtitle: 'Pure Mulberry Silk',
-      image: '/images/products/loungewear-1.svg'
+      image: '/images/products/loungewear-1.jpg',
+      count: 'Pure Silk'
+    },
+    {
+      name: 'Objects & Scents',
+      slug: 'diffusers',
+      image: '/images/products/cushion-1.jpg',
+      count: 'Home Series'
     }
   ];
 
-  const lifestyleHighlights = [
-    {
-      name: 'Royal Botanical Diffusers',
-      slug: 'diffusers',
-      image: '/images/products/diffuser-1.svg',
-      desc: 'Hand-blended agarwood and Nigerian cedar aromas.'
-    },
-    {
-      name: 'Artisanal Woven Cushions',
-      slug: 'cushions',
-      image: '/images/products/cushion-1.svg',
-      desc: 'Masterfully handwoven by master Nigerian weavers.'
-    },
-    {
-      name: 'Sculptural Brass Jewellery',
-      slug: 'jewellery',
-      image: '/images/products/jewellery-1.svg',
-      desc: 'Lost-wax cast modern African minimalist statements.'
+  const handleQuickAdd = (product: typeof featuredPieces[0]) => {
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+      sku: product.sku
+    });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 2000);
+  };
+
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail.trim()) {
+      setNewsletterSuccess(true);
+      setNewsletterEmail('');
+      setTimeout(() => setNewsletterSuccess(false), 4000);
     }
-  ];
+  };
 
   return (
-    <main className="min-h-screen">
-      {/* Hero Section with Editorial Background */}
-      <section className="relative min-h-[95vh] w-full bg-[var(--color-brand-navy)] overflow-hidden flex items-center justify-center pt-28 pb-16">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-35 mix-blend-overlay"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1800&auto=format&fit=crop')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-brand-navy)]/95 via-[var(--color-brand-navy)]/80 to-[var(--color-brand-purple)]/90" />
-        
-        <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl py-12">
-          {/* Dual-Presence Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/20 text-white/90 text-[10px] uppercase tracking-[0.25em] font-semibold mb-6">
-            <span>Lagos Atelier 🇳🇬</span>
-            <span>•</span>
-            <span>London Studio 🇬🇧</span>
-          </div>
-
-          <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl text-[var(--color-brand-cream)] leading-tight mb-6">
-            Lagos Craftsmanship. <br/> London Elegance.
-          </h1>
-          
-          <p className="text-[var(--color-brand-cream)] text-base md:text-xl font-light mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed">
-            Contemporary African luxury crafted by master artisans in Lagos and curated in London. Discover hand-finished silk kaftans, sharp tailored crepe sets, and artisanal home scents with express doorstep delivery across Nigeria and the United Kingdom.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              to="/shop"
-              className="bg-[var(--color-brand-cream)] text-[var(--color-brand-navy)] px-10 py-4 uppercase tracking-[0.2em] text-xs font-bold hover:bg-[var(--color-brand-lavender)] transition-colors duration-300 shadow-2xl"
-            >
-              Explore Collection ({currency}) →
-            </Link>
-            <Link
-              to="/categories/kaftans"
-              className="border border-white/40 text-white px-8 py-4 uppercase tracking-[0.2em] text-xs font-bold hover:bg-white hover:text-[var(--color-brand-navy)] transition-colors backdrop-blur-sm"
-            >
-              Signature Kaftans (UK 8–20)
-            </Link>
-          </div>
+    <div className="pt-28 min-h-screen bg-[var(--color-brand-cream)] text-[var(--color-brand-navy)]">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[var(--color-brand-navy)] text-white px-5 py-3 text-xs tracking-wider flex items-center gap-3 shadow-xl">
+          <Check className="w-4 h-4 text-emerald-400" />
+          <span>{toastMessage}</span>
         </div>
-      </section>
+      )}
 
-      {/* Cross-Border Pillars: Lagos x London */}
-      <section className="bg-white py-12 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-brand-lavender)] flex items-center justify-center text-[var(--color-brand-purple)] font-bold shrink-0">
-              🇳🇬
-            </div>
-            <div>
-              <h4 className="font-playfair text-lg font-bold text-[var(--color-brand-navy)]">Handmade in Lagos</h4>
-              <p className="text-xs text-gray-500 font-light mt-1 leading-relaxed">
-                Every piece is tailored by heritage Nigerian craftspeople in our Victoria Island atelier using mulberry silks and breathable crepes.
-              </p>
+      {/* Hero Section — Minimal Luxury Editorial */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto pt-6 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] mb-4 font-normal">
+              Collection 2026
+            </span>
+            <h1 className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.15] text-[var(--color-brand-navy)] mb-6">
+              Fluid Silhouettes, Tailored Grace.
+            </h1>
+            <p className="text-stone-600 text-sm md:text-base font-light leading-relaxed mb-8 max-w-md">
+              Contemporary garments and living objects designed for ease, movement, and enduring elegance.
+            </p>
+            <div className="flex items-center gap-6">
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-3 px-8 py-3.5 bg-[var(--color-brand-navy)] text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-black transition-colors"
+              >
+                <span>View Collection</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                to="/categories/kaftans"
+                className="text-xs uppercase tracking-[0.2em] text-stone-700 hover:text-black font-medium transition-colors underline underline-offset-4"
+              >
+                Explore Kaftans
+              </Link>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-brand-lavender)] flex items-center justify-center text-[var(--color-brand-purple)] font-bold shrink-0">
-              🇬🇧
-            </div>
-            <div>
-              <h4 className="font-playfair text-lg font-bold text-[var(--color-brand-navy)]">Curated in London</h4>
-              <p className="text-xs text-gray-500 font-light mt-1 leading-relaxed">
-                Precision British cuts, standard UK sizing (UK 6–20), and local UK concierge with rapid Royal Mail &amp; DPD tracked dispatch.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-brand-lavender)] flex items-center justify-center text-[var(--color-brand-purple)] font-bold shrink-0">
-              ✈️
-            </div>
-            <div>
-              <h4 className="font-playfair text-lg font-bold text-[var(--color-brand-navy)]">Dual-Currency &amp; Shipping</h4>
-              <p className="text-xs text-gray-500 font-light mt-1 leading-relaxed">
-                Seamless checkout in ₦ NGN or £ GBP. Zero customs surprises for UK clients and same-day delivery options across Lagos.
-              </p>
+          <div className="lg:col-span-7 order-1 lg:order-2">
+            <div className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/3] overflow-hidden bg-stone-100">
+              <img
+                src="/images/products/kaftan-1.jpg"
+                alt="Silk Kaftan Editorial"
+                className="w-full h-full object-cover object-top filter contrast-[1.02]"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Apparel Categories */}
-      <section className="py-24 px-6 md:px-12 lg:px-24 bg-[var(--color-brand-cream)]">
-        <div className="flex flex-col sm:flex-row justify-between sm:items-end mb-16 gap-4">
+      {/* Editorial Grid: Selected Works */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto py-16 border-t border-[var(--color-brand-border)]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-brand-purple)] font-bold">Curated Silhouettes</span>
-            <h2 className="font-playfair text-4xl md:text-5xl text-[var(--color-brand-navy)] mt-1">Shop by Category</h2>
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-1">
+              Selected Pieces
+            </span>
+            <h2 className="font-playfair text-2xl md:text-3xl text-[var(--color-brand-navy)] font-normal">
+              Signature Garments &amp; Scents
+            </h2>
           </div>
-          <Link to="/categories" className="uppercase tracking-widest text-xs font-bold text-[var(--color-brand-purple)] hover:text-[var(--color-brand-navy)] transition-colors">
-            View All Categories →
+          <Link
+            to="/shop"
+            className="text-xs uppercase tracking-[0.18em] text-[var(--color-brand-navy)] hover:text-stone-600 font-medium inline-flex items-center gap-2 transition-colors"
+          >
+            <span>View All ({featuredPieces.length})</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featuredCategories.map((category) => (
-            <Link key={category.slug} to={`/categories/${category.slug}`} className="group cursor-pointer flex flex-col bg-white p-4 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="aspect-[3/4] w-full bg-gray-200 mb-6 overflow-hidden relative">
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <span className="text-white text-xs uppercase tracking-widest font-bold">
-                    Discover Collection →
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featuredPieces.map((piece) => {
+            const isFav = isInWishlist(piece.id);
+            const isAdded = addedId === piece.id;
+
+            return (
+              <div key={piece.id} className="group flex flex-col">
+                <div className="relative aspect-[3/4] overflow-hidden bg-stone-100 mb-4">
+                  <Link to={`/shop/${piece.id}`} className="block w-full h-full">
+                    <img
+                      src={piece.image}
+                      alt={piece.name}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </Link>
+
+                  {/* Minimal actions */}
+                  <button
+                    onClick={() => toggleWishlist({
+                      productId: piece.id,
+                      name: piece.name,
+                      price: piece.price,
+                      category: piece.category,
+                      image: piece.image
+                    })}
+                    aria-label="Save to wishlist"
+                    className="absolute top-3 right-3 p-2 bg-white/80 hover:bg-white text-stone-700 transition-colors backdrop-blur-xs cursor-pointer"
+                  >
+                    <Heart
+                      className={`w-3.5 h-3.5 ${isFav ? 'fill-stone-900 text-stone-900' : 'text-stone-600'}`}
+                    />
+                  </button>
+
+                  <button
+                    onClick={() => handleQuickAdd(piece)}
+                    className="absolute bottom-0 inset-x-0 py-3 bg-[var(--color-brand-navy)]/90 text-white text-[10px] uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-xs cursor-pointer"
+                  >
+                    {isAdded ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Added to Bag</span>
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Add to Bag</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="flex flex-col flex-1">
+                  <span className="text-[10px] uppercase tracking-widest text-[var(--color-brand-muted)] mb-1">
+                    {piece.category}
                   </span>
+                  <Link
+                    to={`/shop/${piece.id}`}
+                    className="font-playfair text-base font-normal text-[var(--color-brand-navy)] hover:text-stone-600 transition-colors mb-2"
+                  >
+                    {piece.name}
+                  </Link>
+                  <p className="text-xs text-stone-500 font-light line-clamp-1 mb-3">
+                    {piece.description}
+                  </p>
+                  <div className="mt-auto pt-1 flex items-center justify-between text-xs">
+                    <span className="font-medium text-stone-900">
+                      {formatPrice(piece.price, piece.priceGBP)}
+                    </span>
+                    <Link
+                      to={`/shop/${piece.id}`}
+                      className="text-[10px] uppercase tracking-widest text-stone-400 hover:text-black transition-colors"
+                    >
+                      Details
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <h3 className="font-playfair text-2xl text-[var(--color-brand-charcoal)] group-hover:text-[var(--color-brand-purple)] transition-colors">
-                {category.name}
-              </h3>
-              <span className="text-xs text-gray-500 font-light mt-1">
-                {category.subtitle}
-              </span>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Editorial Feature Spotlight — Honest craftsmanship */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto py-20 border-t border-[var(--color-brand-border)]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 grid grid-cols-2 gap-4">
+            <div className="aspect-[3/4] bg-stone-100 overflow-hidden">
+              <img
+                src="/images/products/kaftan-3.jpg"
+                alt="Detail of fabric"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="aspect-[3/4] bg-stone-100 overflow-hidden mt-8">
+              <img
+                src="/images/products/diffuser-2.jpg"
+                alt="Detail of scent"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 lg:pl-8">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-3">
+              Craft &amp; Silhouette
+            </span>
+            <h2 className="font-playfair text-3xl md:text-4xl font-normal text-[var(--color-brand-navy)] leading-tight mb-6">
+              Thoughtfully proportioned for effortless daily wear.
+            </h2>
+            <p className="text-stone-600 font-light text-sm md:text-base leading-relaxed mb-6">
+              Our designs focus on breathability, clean movement, and tactile luxury. Each kaftan is cut to drape naturally across diverse silhouettes, while our home objects are hand-blended with natural botanicals.
+            </p>
+            <div className="grid grid-cols-2 gap-6 pt-4 border-t border-stone-200">
+              <div>
+                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Pure Fibres</h4>
+                <p className="text-xs text-stone-500 font-light">Mulberry silk, woven African cotton, and fluid crepes.</p>
+              </div>
+              <div>
+                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Fluid Sizing</h4>
+                <p className="text-xs text-stone-500 font-light">One-size draping tailored to flatter comfortably.</p>
+              </div>
+            </div>
+            <div className="mt-8">
+              <Link
+                to="/about"
+                className="text-xs uppercase tracking-[0.2em] font-medium text-stone-900 hover:text-stone-500 transition-colors inline-flex items-center gap-2 underline underline-offset-4"
+              >
+                <span>Read About Our Process</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Explore by Category */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto py-16 border-t border-[var(--color-brand-border)]">
+        <div className="mb-10">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-1">
+            Collections
+          </span>
+          <h2 className="font-playfair text-2xl md:text-3xl font-normal text-[var(--color-brand-navy)]">
+            Explore Categories
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {editorialCategories.map((cat) => (
+            <Link
+              key={cat.name}
+              to={`/categories/${cat.slug}`}
+              className="group block relative aspect-[4/5] bg-stone-100 overflow-hidden"
+            >
+              <img
+                src={cat.image}
+                alt={cat.name}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex flex-col justify-end p-6 text-white">
+                <span className="text-[10px] uppercase tracking-widest text-stone-300 mb-1">
+                  {cat.count}
+                </span>
+                <h3 className="font-playfair text-xl font-normal group-hover:underline underline-offset-4">
+                  {cat.name}
+                </h3>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Brand Narrative Banner */}
-      <section className="bg-[var(--color-brand-navy)] text-white py-20 px-6 md:px-12 lg:px-24 border-y border-white/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-[10px] uppercase tracking-[0.4em] text-[var(--color-brand-lavender)] font-bold block mb-4">
-            The Transatlantic Atelier Standard
+      {/* Quiet Newsletter */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto py-20 border-t border-[var(--color-brand-border)]">
+        <div className="max-w-xl mx-auto text-center">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-2">
+            Stay in Touch
           </span>
-          <h2 className="font-playfair text-3xl md:text-5xl leading-tight mb-6">
-            “Rooted in Lagos heritage. Styled for cosmopolitan London living.”
-          </h2>
-          <p className="text-white/70 font-light text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-8">
-            From our design atelier in Lagos to our presence in London, Ifẹ́mi bridges continents. Every kaftan, tailored set, and diffuser tells a story of modern African luxury with British sophistication.
+          <h3 className="font-playfair text-2xl md:text-3xl font-normal text-[var(--color-brand-navy)] mb-4">
+            Private Updates &amp; New Silhouettes
+          </h3>
+          <p className="text-xs text-stone-500 font-light mb-8 leading-relaxed">
+            Receive discreet notifications when new seasonal releases and limited pieces arrive.
           </p>
-          <div className="flex justify-center gap-4">
-            <Link
-              to="/about"
-              className="inline-block px-8 py-3.5 border border-white/30 text-white text-xs uppercase tracking-widest font-semibold hover:bg-white hover:text-[var(--color-brand-navy)] transition-colors"
-            >
-              Our Story (Lagos &amp; London) →
-            </Link>
-            <Link
-              to="/shipping"
-              className="inline-block px-8 py-3.5 bg-white/10 text-white text-xs uppercase tracking-widest font-semibold hover:bg-white/20 transition-colors"
-            >
-              Delivery Guide (UK &amp; Nigeria)
-            </Link>
-          </div>
+
+          {newsletterSuccess ? (
+            <div className="p-3 bg-stone-100 text-stone-800 text-xs tracking-wider uppercase">
+              Thank you for subscribing.
+            </div>
+          ) : (
+            <form onSubmit={handleNewsletter} className="flex gap-2 max-w-md mx-auto">
+              <input
+                type="email"
+                required
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                placeholder="Your email address"
+                className="flex-1 bg-white border border-stone-300 px-4 py-3 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-stone-800 font-light"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-[var(--color-brand-navy)] text-white text-xs uppercase tracking-widest font-medium hover:bg-black transition-colors"
+              >
+                Join
+              </button>
+            </form>
+          )}
         </div>
       </section>
-
-      {/* Lifestyle & Home Accents */}
-      <section className="py-24 px-6 md:px-12 lg:px-24 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-brand-purple)] font-bold">Living &amp; Sensory Rituals</span>
-            <h2 className="font-playfair text-4xl text-[var(--color-brand-navy)] mt-1 mb-3">Ifẹ́mi Home &amp; Accents</h2>
-            <p className="text-gray-500 font-light text-sm">Elevate your living space in Lagos, London, and beyond with artisanal diffusers, handwoven cushions, and sculptural brass jewellery.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {lifestyleHighlights.map((item) => (
-              <Link key={item.slug} to={`/categories/${item.slug}`} className="group flex flex-col">
-                <div className="aspect-[4/3] w-full bg-gray-100 mb-4 overflow-hidden relative shadow-sm border border-gray-200">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <h4 className="font-playfair text-xl text-gray-900 group-hover:text-[var(--color-brand-purple)] transition-colors font-semibold">
-                  {item.name}
-                </h4>
-                <p className="text-xs text-gray-500 font-light mt-1">{item.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
   );
 }

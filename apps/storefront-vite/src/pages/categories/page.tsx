@@ -4,56 +4,56 @@ const categories = [
   {
     name: "Kaftans",
     slug: "kaftans",
-    description: "Flowing silhouettes crafted for effortless grace. Our kaftans feature our signature One Size Fluid Drape designed to flatter UK 8 through UK 20.",
-    count: "12 pieces",
-    image: "/images/products/kaftan-1.svg"
+    description: "Flowing silhouettes in natural silk blends designed for fluid movement and comfort.",
+    count: "4 Silhouettes",
+    image: "/images/products/kaftan-1.jpg"
   },
   {
     name: "Trouser Sets",
     slug: "trouser-sets",
-    description: "Coordinated two-piece ensembles with high-waisted tailored trousers and crossover blouses. Available in XS through XXL.",
-    count: "8 pieces",
-    image: "/images/products/trouser-1.svg"
+    description: "Coordinated two-piece ensembles with high-waisted tailored trousers and crossover blouses.",
+    count: "3 Silhouettes",
+    image: "/images/products/trouser-1.jpg"
   },
   {
     name: "Loungewear",
     slug: "loungewear",
-    description: "Featherweight mulberry silk blends tailored for supreme comfort and relaxed daytime elegance.",
-    count: "10 pieces",
-    image: "/images/products/loungewear-1.svg"
+    description: "Featherweight washed silk loungewear tailored for relaxed elegance.",
+    count: "Pure Silk",
+    image: "/images/products/loungewear-1.jpg"
   },
   {
     name: "Diffusers",
     slug: "diffusers",
-    description: "Botanical home fragrances hand-blended in Lagos with Nigerian cedar, royal oud, and golden amber.",
-    count: "6 pieces",
-    image: "/images/products/diffuser-1.svg"
+    description: "Botanical home fragrances blended with cedar, oud, and golden amber.",
+    count: "Home Scents",
+    image: "/images/products/diffuser-1.jpg"
   },
   {
     name: "Cushions",
     slug: "cushions",
-    description: "Textured artisanal cotton cushions handwoven by master Nigerian weavers with geometric motifs.",
-    count: "9 pieces",
-    image: "/images/products/cushion-1.svg"
+    description: "Textured cotton cushions handwoven with geometric motifs.",
+    count: "Artisanal Weaves",
+    image: "/images/products/cushion-1.jpg"
   },
   {
     name: "Jewellery",
     slug: "jewellery",
-    description: "Handcrafted sculptural brass drop earrings and modern minimalist adornments.",
-    count: "14 pieces",
-    image: "/images/products/jewellery-1.svg"
+    description: "Sculptural drop earrings cast in solid recycled brass.",
+    count: "Hand-Cast Brass",
+    image: "/images/products/jewellery-1.jpg"
   },
 ];
 
 export default function CategoriesPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-brand-cream)] pt-28 px-4 md:px-12 lg:px-24 pb-24">
+    <main className="min-h-screen bg-[var(--color-brand-cream)] pt-32 px-6 md:px-12 max-w-7xl mx-auto pb-24 text-[var(--color-brand-navy)]">
       {/* Header */}
-      <header className="mb-16 max-w-2xl">
-        <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-brand-purple)] font-bold">Curated Collections</span>
-        <h1 className="font-playfair text-5xl text-[var(--color-brand-navy)] mt-2 mb-4">All Categories</h1>
-        <p className="text-gray-500 font-light text-sm leading-relaxed">
-          Every piece is designed with intention. Explore our signature apparel and sensory home decor.
+      <header className="mb-14 max-w-xl pb-8 border-b border-[var(--color-brand-border)]">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] font-normal block mb-2">Collections</span>
+        <h1 className="font-playfair text-4xl md:text-5xl font-normal text-[var(--color-brand-navy)] mb-3">All Categories</h1>
+        <p className="text-stone-600 font-light text-sm leading-relaxed">
+          Explore our range of apparel, home scents, and tactile living accents.
         </p>
       </header>
 

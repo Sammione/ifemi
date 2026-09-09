@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const storefrontDir = path.resolve('apps/storefront/public/images/products');
-const adminDir = path.resolve('apps/admin/public/images/products');
+const storefrontDir = path.resolve('apps/storefront-vite/public/images/products');
+const adminDir = path.resolve('apps/admin-vite/public/images/products');
 
 fs.mkdirSync(storefrontDir, { recursive: true });
 fs.mkdirSync(adminDir, { recursive: true });

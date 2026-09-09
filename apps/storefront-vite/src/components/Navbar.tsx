@@ -32,49 +32,44 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Shop', href: '/shop' },
-    { name: 'Categories', href: '/categories' },
+    { name: 'Shop All', href: '/shop' },
     { name: 'Kaftans', href: '/categories/kaftans' },
     { name: 'Sets', href: '/categories/trouser-sets' },
     { name: 'Loungewear', href: '/categories/loungewear' },
-    { name: 'Lifestyle', href: '/categories/diffusers' },
+    { name: 'Objects', href: '/categories/diffusers' },
   ];
 
   return (
     <>
-      {/* Top Transatlantic Bar */}
-      <div className="w-full bg-[var(--color-brand-navy)] text-white text-[10px] tracking-[0.15em] uppercase py-2 px-4 md:px-12 fixed top-0 z-50 flex items-center justify-between border-b border-white/10 shadow-xs">
-        <div className="hidden lg:flex items-center gap-2 text-gray-300 font-medium">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-          <span>Lagos Atelier 🇳🇬 × London Studio 🇬🇧</span>
+      {/* Editorial Announcement & Currency Bar */}
+      <div className="w-full bg-[var(--color-brand-navy)] text-white/80 text-[10px] tracking-[0.18em] uppercase py-2 px-6 md:px-12 fixed top-0 z-50 flex items-center justify-between border-b border-white/10">
+        <div className="text-[9px] md:text-[10px] tracking-widest font-normal text-stone-300">
+          Complimentary Delivery in Nigeria &amp; the United Kingdom
         </div>
-        <div className="text-center mx-auto text-[9px] md:text-[10px] font-medium text-gray-200">
-          <span>Express Delivery Across Nigeria &amp; UK Tracked Delivery via Royal Mail / DPD</span>
-        </div>
-        <div className="flex items-center gap-1 bg-white/10 px-2 py-0.5 rounded-xs">
+        <div className="flex items-center gap-1.5 text-[9px] tracking-widest font-medium">
           <button
             onClick={() => setCurrency('NGN')}
-            className={`px-1.5 py-0.5 font-bold transition-all text-[9px] ${
-              currency === 'NGN' ? 'bg-[var(--color-brand-purple)] text-white' : 'text-gray-300 hover:text-white'
+            className={`px-2 py-0.5 transition-colors ${
+              currency === 'NGN' ? 'text-white font-semibold underline underline-offset-4' : 'text-stone-400 hover:text-white'
             }`}
             title="Nigerian Naira"
           >
-            ₦ NGN
+            NGN (₦)
           </button>
-          <span className="opacity-40 text-xs">|</span>
+          <span className="text-stone-600">/</span>
           <button
             onClick={() => setCurrency('GBP')}
-            className={`px-1.5 py-0.5 font-bold transition-all text-[9px] ${
-              currency === 'GBP' ? 'bg-[var(--color-brand-purple)] text-white' : 'text-gray-300 hover:text-white'
+            className={`px-2 py-0.5 transition-colors ${
+              currency === 'GBP' ? 'text-white font-semibold underline underline-offset-4' : 'text-stone-400 hover:text-white'
             }`}
-            title="British Pound Sterling"
+            title="British Pound"
           >
-            £ GBP
+            GBP (£)
           </button>
         </div>
       </div>
 
-      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 fixed top-8 z-50 bg-[var(--color-brand-cream)]/95 backdrop-blur-md border-b border-[var(--color-brand-navy)]/10 transition-all">
+      <header className="w-full h-20 flex items-center justify-between px-6 md:px-12 fixed top-8 z-50 bg-[var(--color-brand-cream)]/95 backdrop-blur-md border-b border-[var(--color-brand-border)] transition-all">
         {/* Mobile menu toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -86,27 +81,24 @@ export default function Navbar() {
           </svg>
         </button>
 
-        {/* Ifẹ́mi Lifestyle Logo */}
+        {/* Logo */}
         <Logo />
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest">
+        <nav className="hidden md:flex items-center gap-9 text-[11px] uppercase tracking-[0.2em]">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 to={link.href}
-                className={`transition-colors font-medium relative py-1 ${
+                className={`transition-colors py-1 ${
                   isActive
-                    ? 'text-[var(--color-brand-purple)] font-bold'
-                    : 'text-[var(--color-brand-charcoal)] hover:text-[var(--color-brand-purple)]'
+                    ? 'text-[var(--color-brand-navy)] font-semibold border-b border-[var(--color-brand-navy)]'
+                    : 'text-[var(--color-brand-charcoal)] hover:text-black font-normal'
                 }`}
               >
                 {link.name}
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[var(--color-brand-purple)]" />
-                )}
               </Link>
             );
           })}
@@ -206,8 +198,15 @@ export default function Navbar() {
                 >
                   Contact Concierge
                 </Link>
+                <Link
+                  to="/orders"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[var(--color-brand-charcoal)] hover:text-[var(--color-brand-purple)] py-1 border-b border-gray-100 font-medium"
+                >
+                  Track Orders
+                </Link>
                 <a
-                  href="http://localhost:3001"
+                  href="http://localhost:3002"
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setMobileMenuOpen(false)}

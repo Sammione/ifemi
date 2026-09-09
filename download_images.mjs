@@ -19,9 +19,14 @@ const images = [
   { name: 'trouser-blue.jpg', url: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=70&w=600&auto=format&fit=crop' }
 ];
 
-const destDir = path.resolve('apps/storefront/public/images/products');
-if (!fs.existsSync(destDir)) {
-  fs.mkdirSync(destDir, { recursive: true });
+const destDirs = [
+  path.resolve('apps/storefront-vite/public/images/products'),
+  path.resolve('apps/admin-vite/public/images/products')
+];
+for (const dir of destDirs) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
 }
 
 function downloadFile(url, dest) {
@@ -47,14 +52,16 @@ function downloadFile(url, dest) {
 }
 
 async function run() {
-  console.log('Downloading product images to local folder...');
+  console.log('Downloading product images to local folders...');
   for (const item of images) {
-    const filePath = path.join(destDir, item.name);
-    try {
-      await downloadFile(item.url, filePath);
-      console.log(`✓ Downloaded ${item.name} (${(fs.statSync(filePath).size / 1024).toFixed(1)} KB)`);
-    } catch (e) {
-      console.error(`✗ Error downloading ${item.name}: ${e.message}`);
+    for (const dir of destDirs) {
+      const filePath = path.join(dir, item.name);
+      try {
+        await downloadFile(item.url, filePath);
+        console.log(`✓ Downloaded ${item.name} to ${path.basename(path.dirname(dir))} (${(fs.statSync(filePath).size / 1024).toFixed(1)} KB)`);
+      } catch (e) {
+        console.error(`✗ Error downloading ${item.name}: ${e.message}`);
+      }
     }
   }
   console.log('Done!');

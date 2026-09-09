@@ -2,11 +2,14 @@
   "name": "Ecom",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "build": "npm run build:storefront && npm run build:admin && npm run build:api",
+    "build:storefront": "npm --prefix apps/storefront-vite run build",
+    "build:admin": "npm --prefix apps/admin-vite run build",
+    "build:api": "npm --prefix apps/api run build",
+    "dev:storefront": "npm --prefix apps/storefront-vite run dev",
+    "dev:admin": "npm --prefix apps/admin-vite run dev",
+    "dev:api": "npm --prefix apps/api run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "prettier": "3.9.6",

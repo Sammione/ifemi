@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: 'Can I request bespoke sizing or custom hem alterations?',
-    a: 'Yes, our Lagos atelier accommodates bespoke requests and custom hem lengths. Contact our concierge via WhatsApp in Lagos (+234) or London (+44) before placing your order.'
+    a: 'Yes, we accommodate custom sizing and hem adjustments. Contact our team via WhatsApp in Lagos (+234 802 829 9093) or London (+44 7729 412585) before placing your order.'
   }
 ];
 

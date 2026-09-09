@@ -1,0 +1,388 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Silk Kaftan",
+      "slug": "silk-kaftan",
+      "price": 45000,
+      "priceGBP": 28,
+      "category": "Kaftans",
+      "image": "/images/products/kaftan-1.jpg",
+      "images": [
+        "/images/products/kaftan-1.jpg",
+        "/images/products/kaftan-2.jpg",
+        "/images/products/kaftan-3.jpg"
+      ],
+      "isOneSize": true,
+      "stock": 13,
+      "threshold": 5,
+      "sku": "KAFTAN-BLU-001",
+      "origin": "Crafted in Lagos, Nigeria",
+      "sizes": [
+        "UK 8 - UK 20 (Fluid Drape)"
+      ],
+      "colors": [
+        {
+          "name": "Midnight Navy",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Royal Purple",
+          "hex": "#4B2E83",
+          "bgClass": "bg-[#4B2E83]"
+        }
+      ],
+      "description": "Mulberry silk blend with fluid drape and subtle piping. Tailored for comfort in warm climates.",
+      "fabricCare": "100% Mulberry Silk Blend. Dry clean or gentle hand wash.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 42
+    },
+    {
+      "id": "2",
+      "name": "Crepe Trouser Set",
+      "slug": "crepe-trouser-set",
+      "price": 65000,
+      "priceGBP": 40,
+      "salePrice": 58000,
+      "salePriceGBP": 36,
+      "category": "Trouser Sets",
+      "image": "/images/products/trouser-1.jpg",
+      "images": [
+        "/images/products/trouser-1.jpg",
+        "/images/products/trouser-2.jpg",
+        "/images/products/trouser-blue.jpg"
+      ],
+      "isOneSize": false,
+      "stock": 8,
+      "threshold": 4,
+      "sku": "TSET-PRP-002",
+      "origin": "Tailored in Lagos, Nigeria",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "colors": [
+        {
+          "name": "Royal Purple",
+          "hex": "#4B2E83",
+          "bgClass": "bg-[#4B2E83]"
+        },
+        {
+          "name": "Midnight Navy",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "description": "High-waisted trousers with matching crossover blouse. Clean tailored seams.",
+      "fabricCare": "Premium Crepe. Machine wash cold delicate or dry clean.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 28
+    },
+    {
+      "id": "3",
+      "name": "Silk Loungewear Set",
+      "slug": "silk-loungewear-set",
+      "price": 35000,
+      "priceGBP": 22,
+      "category": "Loungewear",
+      "image": "/images/products/loungewear-1.jpg",
+      "images": [
+        "/images/products/loungewear-1.jpg"
+      ],
+      "isOneSize": false,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "LNG-LAV-003",
+      "origin": "Mulberry Silk, Lagos",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        {
+          "name": "Lavender Mist",
+          "hex": "#967BB6",
+          "bgClass": "bg-[#967BB6]"
+        },
+        {
+          "name": "Cream",
+          "hex": "#FAF9F6",
+          "bgClass": "bg-[#FAF9F6]"
+        }
+      ],
+      "description": "Relaxed two-piece in lightweight washed silk. Features easy drawstring waist.",
+      "fabricCare": "Washed Silk. Hand wash cold with gentle detergent.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 19
+    },
+    {
+      "id": "4",
+      "name": "Woven Cushion",
+      "slug": "woven-cushion",
+      "price": 18000,
+      "priceGBP": 12,
+      "category": "Cushions",
+      "image": "/images/products/cushion-1.jpg",
+      "images": [
+        "/images/products/cushion-1.jpg",
+        "/images/products/cushion-2.jpg"
+      ],
+      "isOneSize": true,
+      "stock": 20,
+      "threshold": 6,
+      "sku": "CSH-004",
+      "origin": "Handwoven in Nigeria",
+      "sizes": [
+        "50 x 50 cm"
+      ],
+      "colors": [
+        {
+          "name": "Natural Ochre",
+          "hex": "#C68642",
+          "bgClass": "bg-[#C68642]"
+        }
+      ],
+      "description": "Textured artisanal cushion cover woven with cotton and wool yarns.",
+      "fabricCare": "Spot clean or gentle hand wash.",
+      "isPublished": true,
+      "isFeatured": false,
+      "salesCount": 15
+    },
+    {
+      "id": "5",
+      "name": "Amber & Oud Diffuser",
+      "slug": "amber-oud-diffuser",
+      "price": 22000,
+      "priceGBP": 15,
+      "category": "Diffusers",
+      "image": "/images/products/diffuser-1.jpg",
+      "images": [
+        "/images/products/diffuser-1.jpg",
+        "/images/products/diffuser-2.jpg"
+      ],
+      "isOneSize": true,
+      "stock": 16,
+      "threshold": 5,
+      "sku": "DIF-OUD-005",
+      "origin": "Hand-blended in Lagos",
+      "sizes": [
+        "200ml Glass Decanter"
+      ],
+      "colors": [
+        {
+          "name": "Amber Glass",
+          "hex": "#78350F",
+          "bgClass": "bg-[#78350F]"
+        }
+      ],
+      "description": "Cedarwood, agarwood, and amber resin in custom decanter with reed sticks.",
+      "fabricCare": "Keep away from direct sunlight.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 34
+    },
+    {
+      "id": "6",
+      "name": "Brass Collar Necklace",
+      "slug": "brass-collar-necklace",
+      "price": 28000,
+      "priceGBP": 18,
+      "category": "Jewellery",
+      "image": "/images/products/jewellery-1.jpg",
+      "images": [
+        "/images/products/jewellery-1.jpg",
+        "/images/products/jewellery-2.jpg"
+      ],
+      "isOneSize": true,
+      "stock": 9,
+      "threshold": 3,
+      "sku": "JWL-BRS-006",
+      "origin": "Cast in Benin City",
+      "sizes": [
+        "Adjustable Choker"
+      ],
+      "colors": [
+        {
+          "name": "Brushed Brass",
+          "hex": "#D4AF37",
+          "bgClass": "bg-[#D4AF37]"
+        }
+      ],
+      "description": "Solid brass hand-forged choker with satin finish.",
+      "fabricCare": "Polish with soft dry cloth.",
+      "isPublished": true,
+      "isFeatured": false,
+      "salesCount": 11
+    }
+  ],
+  "orders": [
+    {
+      "orderNumber": "IFEMI-NG-65402",
+      "userId": null,
+      "customerName": "Folake Test",
+      "email": "guest@example.com",
+      "phone": "+2348023341122",
+      "currency": "NGN",
+      "subtotal": 45000,
+      "deliveryFee": 3500,
+      "totalAmount": 48500,
+      "paymentStatus": "PAID",
+      "orderStatus": "CONFIRMED",
+      "deliveryStatus": "Order confirmed. Preparing dispatch to Lagos.",
+      "shippingRegion": "NIGERIA",
+      "shippingAddress": {
+        "fullName": "Folake Test",
+        "address": "14 Lekki Phase 1",
+        "city": "Lagos",
+        "state": "",
+        "phone": "+2348023341122",
+        "country": "Nigeria"
+      },
+      "items": [
+        {
+          "productId": "1",
+          "name": "Silk Kaftan",
+          "quantity": 1,
+          "price": 45000
+        }
+      ],
+      "courier": "GIG Logistics Express",
+      "id": "ord-1788955852486",
+      "createdAt": "2026-09-09T12:10:52.486Z",
+      "updatedAt": "2026-09-09T12:11:02.875Z"
+    },
+    {
+      "id": "ord-1001",
+      "orderNumber": "IFEMI-NG-84920",
+      "customerName": "Folake Adeyemi",
+      "email": "folake.a@example.com",
+      "phone": "+234 802 334 1122",
+      "currency": "NGN",
+      "subtotal": 65000,
+      "deliveryFee": 3500,
+      "totalAmount": 68500,
+      "paymentStatus": "PAID",
+      "orderStatus": "SHIPPED",
+      "deliveryStatus": "In transit with GIG Logistics",
+      "shippingRegion": "NIGERIA",
+      "shippingAddress": {
+        "fullName": "Folake Adeyemi",
+        "address": "12 Admiralty Way, Lekki Phase 1",
+        "city": "Lagos",
+        "state": "Lagos - Island",
+        "phone": "+234 802 334 1122"
+      },
+      "items": [
+        {
+          "productId": "2",
+          "name": "Crepe Trouser Set",
+          "quantity": 1,
+          "price": 65000,
+          "size": "M",
+          "color": "Royal Purple"
+        }
+      ],
+      "courier": "GIG Logistics",
+      "trackingNumber": "GIG-77391024",
+      "createdAt": "2026-09-07T10:13:30.956Z",
+      "updatedAt": "2026-09-09T10:13:30.957Z"
+    },
+    {
+      "id": "ord-1002",
+      "orderNumber": "IFEMI-UK-55192",
+      "customerName": "Victoria Davies",
+      "email": "vdavies@example.co.uk",
+      "phone": "+44 7700 900123",
+      "currency": "GBP",
+      "subtotal": 56,
+      "deliveryFee": 6.5,
+      "totalAmount": 62.5,
+      "paymentStatus": "PAID",
+      "orderStatus": "DELIVERED",
+      "deliveryStatus": "Delivered by Royal Mail",
+      "shippingRegion": "UK",
+      "shippingAddress": {
+        "fullName": "Victoria Davies",
+        "address": "42 Highbury Grove",
+        "city": "London",
+        "state": "London & Greater London",
+        "postalCode": "N5 2EA",
+        "phone": "+44 7700 900123"
+      },
+      "items": [
+        {
+          "productId": "1",
+          "name": "Silk Kaftan",
+          "quantity": 2,
+          "price": 28
+        }
+      ],
+      "courier": "Royal Mail Tracked 24",
+      "trackingNumber": "RM-GB-49201940",
+      "createdAt": "2026-09-04T10:13:30.957Z",
+      "updatedAt": "2026-09-09T10:13:30.957Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Kaftans",
+      "slug": "kaftans",
+      "image": "/images/products/kaftan-1.jpg",
+      "productsCount": 1,
+      "featured": true
+    },
+    {
+      "id": "cat-2",
+      "name": "Trouser Sets",
+      "slug": "trouser-sets",
+      "image": "/images/products/trouser-1.jpg",
+      "productsCount": 1,
+      "featured": true
+    },
+    {
+      "id": "cat-3",
+      "name": "Loungewear",
+      "slug": "loungewear",
+      "image": "/images/products/loungewear-1.jpg",
+      "productsCount": 1,
+      "featured": true
+    },
+    {
+      "id": "cat-4",
+      "name": "Cushions",
+      "slug": "cushions",
+      "image": "/images/products/cushion-1.jpg",
+      "productsCount": 1,
+      "featured": false
+    },
+    {
+      "id": "cat-5",
+      "name": "Diffusers",
+      "slug": "diffusers",
+      "image": "/images/products/diffuser-1.jpg",
+      "productsCount": 1,
+      "featured": true
+    },
+    {
+      "id": "cat-6",
+      "name": "Jewellery",
+      "slug": "jewellery",
+      "image": "/images/products/jewellery-1.jpg",
+      "productsCount": 1,
+      "featured": false
+    }
+  ],
+  "updatedAt": "2026-09-09T12:11:02.875Z"
+}

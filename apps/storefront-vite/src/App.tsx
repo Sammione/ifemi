@@ -20,12 +20,14 @@ import Cookies from './pages/cookies/page';
 import Faq from './pages/faq/page';
 import Login from './pages/login/page';
 import Order from './pages/order/[id]/page';
+import Orders from './pages/orders/page';
 import Privacy from './pages/privacy/page';
 import Register from './pages/register/page';
 import Returns from './pages/returns/page';
 import Search from './pages/search/page';
 import Shipping from './pages/shipping/page';
 import Shop from './pages/shop/page';
+import ProductDetail from './pages/shop/[id]/page';
 import SizeGuide from './pages/size-guide/page';
 import Terms from './pages/terms/page';
 
@@ -40,6 +42,7 @@ function App() {
               <div className="flex-1">
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/home" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/account" element={<Account />} />
                   <Route path="/blog" element={<Blog />} />
@@ -51,6 +54,7 @@ function App() {
                   <Route path="/cookies" element={<Cookies />} />
                   <Route path="/faq" element={<Faq />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/orders" element={<Orders />} />
                   <Route path="/order/:id" element={<Order />} />
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/register" element={<Register />} />
@@ -58,8 +62,10 @@ function App() {
                   <Route path="/search" element={<Search />} />
                   <Route path="/shipping" element={<Shipping />} />
                   <Route path="/shop" element={<Shop />} />
+                  <Route path="/shop/:id" element={<ProductDetail />} />
                   <Route path="/size-guide" element={<SizeGuide />} />
                   <Route path="/terms" element={<Terms />} />
+                  <Route path="*" element={<Home />} />
                 </Routes>
               </div>
               <Footer />

@@ -1,123 +1,20 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '../db';
+import { store, ProductRecord } from '../store';
 
 const router = Router();
 
-// Cross-border catalog (Lagos Atelier x London Studio)
-export const fallbackProducts = [
-  {
-    id: '1',
-    name: 'Midnight Elegance Silk Kaftan',
-    slug: 'midnight-elegance-silk-kaftan',
-    price: 45000,
-    priceGBP: 28,
-    category: 'Kaftans',
-    image: '/images/products/kaftan-1.svg',
-    isOneSize: true,
-    stock: 14,
-    sku: 'KAFTAN-BLU-001',
-    tag: 'Best Seller',
-    origin: 'Handcrafted in Lagos, Nigeria',
-    curated: 'Dispatched from London Studio & Lagos Hub',
-    sizes: ['UK 8 - UK 20 (Fluid Drape)'],
-    description: 'Flowing midnight silk kaftan tailored by master Nigerian artisans. Designed for effortless grace in Lagos heat or London evening gatherings.'
-  },
-  {
-    id: '2',
-    name: 'Royal Purple Crepe Trouser Set',
-    slug: 'royal-purple-crepe-trouser-set',
-    price: 65000,
-    priceGBP: 40,
-    salePrice: 58000,
-    salePriceGBP: 36,
-    category: 'Trouser Sets',
-    image: '/images/products/trouser-1.svg',
-    isOneSize: false,
-    stock: 8,
-    sku: 'TSET-PRP-002',
-    tag: 'Sale',
-    origin: 'Tailored in Lagos, Nigeria',
-    curated: 'British Cut & Silhouette',
-    sizes: ['UK 8 (XS)', 'UK 10 (S)', 'UK 12 (M)', 'UK 14 (L)', 'UK 16 (XL)', 'UK 18 (XXL)'],
-    description: 'Crisp high-waisted trousers with matching crossover blouse. Precision British tailoring blended with rich African regal purple crepe.'
-  },
-  {
-    id: '3',
-    name: 'Lavender Whisper Silk Loungewear',
-    slug: 'lavender-whisper-silk-loungewear',
-    price: 35000,
-    priceGBP: 22,
-    category: 'Loungewear',
-    image: '/images/products/loungewear-1.svg',
-    isOneSize: false,
-    stock: 12,
-    sku: 'LNG-LAV-003',
-    tag: 'New Arrival',
-    origin: 'Mulberry Silk, Lagos Atelier',
-    curated: 'London Loungewear Collection',
-    sizes: ['UK 8 (XS)', 'UK 10 (S)', 'UK 12 (M)', 'UK 14 (L)', 'UK 16 (XL)'],
-    description: 'Featherweight silk two-piece crafted for supreme comfort from weekend brunches in Lagos to relaxed mornings in London.'
-  },
-  {
-    id: '4',
-    name: 'Handwoven Artisanal Cushion Set',
-    slug: 'handwoven-artisanal-cushion-set',
-    price: 18000,
-    priceGBP: 12,
-    salePrice: 15000,
-    salePriceGBP: 10,
-    category: 'Cushions',
-    image: '/images/products/cushion-1.svg',
-    isOneSize: true,
-    stock: 20,
-    sku: 'CSH-IVO-004',
-    origin: 'Handwoven by master Nigerian weavers',
-    curated: 'London Contemporary Home Living',
-    description: 'Textured artisanal cotton cushions with geometric motifs celebrating Yoruba weaving heritage.'
-  },
-  {
-    id: '5',
-    name: 'Royal Oud & Amber Home Diffuser',
-    slug: 'royal-oud-amber-home-diffuser',
-    price: 22000,
-    priceGBP: 15,
-    category: 'Diffusers',
-    image: '/images/products/diffuser-1.svg',
-    isOneSize: true,
-    stock: 25,
-    sku: 'DIF-OUD-005',
-    tag: 'Bestseller',
-    origin: 'Hand-blended in Lagos with Nigerian Cedar',
-    curated: 'London Olfactory Series',
-    description: 'Rich warm amber and deep royal oud crafted with essential botanical oils.'
-  },
-  {
-    id: '6',
-    name: 'Sculptural Brass Statement Earrings',
-    slug: 'sculptural-brass-statement-earrings',
-    price: 18500,
-    priceGBP: 12,
-    category: 'Jewellery',
-    image: '/images/products/jewellery-1.svg',
-    isOneSize: true,
-    stock: 15,
-    sku: 'JWL-BRS-006',
-    origin: 'Lost-wax cast in Benin & Lagos',
-    curated: 'London Studio Adornments',
-    description: 'Architectural, organic drop earrings handcrafted from recycled solid brass with high-shine polish.'
-  }
-];
+// 1. GET all products (with search & category filtering)
+router.get('/', async (req: Request, res: Response): Promise<any> => {
+  const { category, search } = req.query;
 
-// Get all products
-router.get('/', async (req: Request, res: Response) => {
   try {
-    const { category, search } = req.query;
-    let whereClause: any = { status: 'PUBLISHED' };
-
+    const whereClause: any = {};
     if (category) {
-      whereClause.category = { slug: String(category) };
+      whereClause.category = {
+        name: { equals: String(category), mode: 'insensitive' }
+      };
     }
-
     if (search) {
       whereClause.OR = [
         { name: { contains: String(search), mode: 'insensitive' } },
@@ -134,28 +31,33 @@ router.get('/', async (req: Request, res: Response) => {
       return res.json(dbProducts);
     }
   } catch (error) {
-    // Database offline or error, gracefully fallback
+    // Database offline or error, gracefully fallback to store
   }
 
-  // Fallback to cross-border catalog
-  const { category, search } = req.query;
-  let results = [...fallbackProducts];
+  let products = store.getAllProducts();
 
-  if (category) {
-    results = results.filter(p => p.category.toLowerCase() === String(category).toLowerCase());
+  if (category && String(category).toUpperCase() !== 'ALL') {
+    products = products.filter(
+      p => p.category.toLowerCase() === String(category).toLowerCase() ||
+           p.slug.toLowerCase().includes(String(category).toLowerCase())
+    );
   }
 
   if (search) {
     const q = String(search).toLowerCase();
-    results = results.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+    products = products.filter(
+      p => p.name.toLowerCase().includes(q) ||
+           p.description.toLowerCase().includes(q) ||
+           p.sku.toLowerCase().includes(q)
+    );
   }
 
-  res.json(results);
+  res.json(products);
 });
 
-// Get single product by id or slug
+// 2. GET single product by id or slug
 router.get('/:idOrSlug', async (req: Request, res: Response): Promise<any> => {
-  const { idOrSlug } = req.params;
+  const idOrSlug = String(req.params.idOrSlug);
 
   try {
     const dbProduct = await prisma.product.findFirst({
@@ -174,15 +76,128 @@ router.get('/:idOrSlug', async (req: Request, res: Response): Promise<any> => {
       return res.json(dbProduct);
     }
   } catch (error) {
-    // Database offline, fallback to memory
+    // Database offline, fallback to store
   }
 
-  const fallback = fallbackProducts.find(p => p.id === idOrSlug || p.slug === idOrSlug);
-  if (!fallback) {
+  const product = store.getProductByIdOrSlug(idOrSlug);
+  if (!product) {
     return res.status(404).json({ error: 'Product not found' });
   }
 
-  res.json(fallback);
+  res.json(product);
+});
+
+// 3. POST create product (Admin)
+router.post('/', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const {
+      name,
+      category,
+      price,
+      priceGBP,
+      salePrice,
+      salePriceGBP,
+      stock,
+      threshold,
+      sku,
+      image,
+      images,
+      colors,
+      sizes,
+      description,
+      fabricCare,
+      isPublished,
+      isFeatured
+    } = req.body;
+
+    if (!name || !price || !category) {
+      return res.status(400).json({ error: 'Name, category, and price are required.' });
+    }
+
+    const created = store.createProduct({
+      name,
+      slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      category,
+      price: Number(price),
+      priceGBP: priceGBP ? Number(priceGBP) : Math.round(Number(price) / 1600),
+      salePrice: salePrice ? Number(salePrice) : null,
+      salePriceGBP: salePriceGBP ? Number(salePriceGBP) : null,
+      stock: Number(stock) || 0,
+      threshold: Number(threshold) || 5,
+      sku: sku || `IFEMI-${Date.now().toString().slice(-4)}`,
+      image: image || '/images/products/kaftan-1.jpg',
+      images: images || [image || '/images/products/kaftan-1.jpg'],
+      colors: colors || ['Midnight Navy'],
+      sizes: sizes || ['Standard One-Size'],
+      description: description || '',
+      fabricCare: fabricCare || 'Gentle care recommended.',
+      isPublished: isPublished !== undefined ? isPublished : true,
+      isFeatured: isFeatured !== undefined ? isFeatured : false
+    });
+
+    res.status(201).json(created);
+  } catch (error) {
+    console.error('Failed to create product:', error);
+    res.status(500).json({ error: 'Failed to create product' });
+  }
+});
+
+// 4. PUT update product (Admin)
+router.put('/:id', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const id = String(req.params.id);
+    const updates = req.body;
+
+    if (updates.price) updates.price = Number(updates.price);
+    if (updates.priceGBP) updates.priceGBP = Number(updates.priceGBP);
+    if (updates.stock !== undefined) updates.stock = Number(updates.stock);
+
+    const updated = store.updateProduct(id, updates);
+    if (!updated) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.json(updated);
+  } catch (error) {
+    console.error('Failed to update product:', error);
+    res.status(500).json({ error: 'Failed to update product' });
+  }
+});
+
+// 5. DELETE product (Admin)
+router.delete('/:id', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const id = String(req.params.id);
+    const deleted = store.deleteProduct(id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+    res.json({ success: true, message: 'Product deleted' });
+  } catch (error) {
+    console.error('Failed to delete product:', error);
+    res.status(500).json({ error: 'Failed to delete product' });
+  }
+});
+
+// 6. PATCH adjust product stock (Admin / Order fulfillment)
+router.patch('/:id/stock', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const id = String(req.params.id);
+    const { delta } = req.body;
+
+    if (typeof delta !== 'number') {
+      return res.status(400).json({ error: 'Delta number is required' });
+    }
+
+    const updated = store.adjustProductStock(id, delta);
+    if (!updated) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to adjust stock' });
+  }
 });
 
 export default router;

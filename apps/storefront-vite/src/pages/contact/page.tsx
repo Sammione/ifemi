@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
+import { Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: 'Bespoke Order Inquiry', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: 'Product & Order Inquiry', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -11,164 +11,208 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[var(--color-brand-cream)] pt-28 px-4 md:px-12 lg:px-24 pb-24">
+    <main className="min-h-screen bg-[#FAF9F6] pt-28 px-4 md:px-12 lg:px-24 pb-24 text-[#11141A]">
       <div className="max-w-6xl mx-auto">
         <header className="mb-14 text-center">
-          <span className="text-[10px] uppercase tracking-[0.35em] text-[var(--color-brand-purple)] font-bold">
-            Concierge & Inquiries
+          <span className="text-[10px] uppercase tracking-[0.25em] text-stone-500 font-medium">
+            Get in Touch
           </span>
-          <h1 className="font-playfair text-4xl md:text-5xl text-[var(--color-brand-navy)] mt-2 mb-4">
-            Contact Ifẹ́mi Lifestyle
+          <h1 className="font-playfair text-3xl md:text-5xl text-[#11141A] mt-2 mb-3">
+            Contact Us
           </h1>
-          <p className="text-gray-500 font-light text-sm max-w-xl mx-auto leading-relaxed">
-            Our Lagos styling concierge is available to assist with bespoke order consultations, sizing inquiries, and delivery updates.
+          <p className="text-stone-600 font-light text-sm max-w-lg mx-auto leading-relaxed">
+            Have a question about our collections, sizing, or delivery? Reach our offices in Lagos or London directly.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left: Contact Info */}
-          <div className="lg:col-span-5 bg-[var(--color-brand-navy)] text-[var(--color-brand-cream)] p-8 md:p-12 flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-[#11141A] text-white p-8 md:p-10 flex flex-col justify-between rounded-lg">
             <div>
-              <h2 className="font-playfair text-2xl mb-6 border-b border-white/10 pb-4">
-                Transatlantic Concierge
+              <h2 className="font-playfair text-xl mb-6 border-b border-white/10 pb-4">
+                Our Offices
               </h2>
 
-              <div className="space-y-6 text-xs font-light text-white/80 leading-relaxed">
-                <div className="p-3 bg-white/5 border border-white/10 rounded-xs">
-                  <h4 className="uppercase tracking-widest text-[var(--color-brand-lavender)] font-bold text-[10px] mb-1 flex items-center gap-1.5">
-                    <span>🇳🇬</span> Lagos Flagship Atelier
-                  </h4>
-                  <p>Plot 14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria</p>
-                  <p className="mt-1 text-white font-medium">Direct Line: +234 (0) 803 123 4567</p>
-                  <p className="text-white/60">Hours: Mon – Fri: 9:00 AM – 6:00 PM (WAT)</p>
+              <div className="space-y-6 text-xs font-light text-stone-300 leading-relaxed">
+                {/* UK Office */}
+                <div className="p-4 bg-white/5 border border-white/10 rounded-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base">🇬🇧</span>
+                    <h3 className="uppercase tracking-widest text-white font-medium text-[11px]">
+                      United Kingdom
+                    </h3>
+                  </div>
+                  <div className="flex items-start gap-2.5 mt-2 text-stone-300">
+                    <MapPin size={15} className="text-stone-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p>1654 Great Cambridge Road</p>
+                      <p>Enfield, Middlesex</p>
+                      <p>EN1 4TA</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2.5 mt-3 pt-3 border-t border-white/10">
+                    <Phone size={14} className="text-stone-400 shrink-0" />
+                    <a href="tel:+447729412585" className="text-white hover:underline font-mono">
+                      +44 7729 412585
+                    </a>
+                  </div>
                 </div>
 
-                <div className="p-3 bg-white/5 border border-white/10 rounded-xs">
-                  <h4 className="uppercase tracking-widest text-[var(--color-brand-lavender)] font-bold text-[10px] mb-1 flex items-center gap-1.5">
-                    <span>🇬🇧</span> London Concierge Studio
-                  </h4>
-                  <p>Mayfair, London W1K, United Kingdom</p>
-                  <p className="mt-1 text-white font-medium">UK Concierge: +44 (0) 20 7946 0912</p>
-                  <p className="text-white/60">Hours: Mon – Fri: 9:00 AM – 5:30 PM (GMT)</p>
+                {/* Nigeria Office */}
+                <div className="p-4 bg-white/5 border border-white/10 rounded-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-base">🇳🇬</span>
+                    <h3 className="uppercase tracking-widest text-white font-medium text-[11px]">
+                      Nigeria
+                    </h3>
+                  </div>
+                  <div className="flex items-start gap-2.5 mt-2 text-stone-300">
+                    <MapPin size={15} className="text-stone-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p>3/5 Ilaka Street</p>
+                      <p>Off Coker Road, Ilupeju</p>
+                      <p>Lagos, Nigeria</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2.5 mt-3 pt-3 border-t border-white/10">
+                    <Phone size={14} className="text-stone-400 shrink-0" />
+                    <a href="tel:+2348028299093" className="text-white hover:underline font-mono">
+                      +234 802 829 9093
+                    </a>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 className="uppercase tracking-widest text-[var(--color-brand-lavender)] font-bold text-[10px] mb-1">
-                    Email Inquiries
-                  </h4>
-                  <p>concierge@ifemi.ng (Global &amp; UK Inquiries)</p>
-                  <p>orders@ifemi.ng</p>
+                {/* Email Inquiries */}
+                <div className="p-4 bg-white/5 border border-white/10 rounded-md">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Mail size={14} className="text-stone-400" />
+                    <h3 className="uppercase tracking-widest text-white font-medium text-[11px]">
+                      Email
+                    </h3>
+                  </div>
+                  <p><a href="mailto:support@ifemi.com" className="text-stone-200 hover:underline">support@ifemi.com</a></p>
+                  <p className="mt-0.5"><a href="mailto:orders@ifemi.com" className="text-stone-200 hover:underline">orders@ifemi.com</a></p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 pt-6 border-t border-white/10">
+            <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-2.5">
               <a
-                href="https://wa.me/2348000000000"
+                href="https://wa.me/2348028299093"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-3 bg-[#25D366] hover:bg-[#20bd5a] text-black text-xs font-semibold rounded-md flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
-                <span>💬 Chat on WhatsApp Concierge</span>
+                <MessageCircle size={16} />
+                <span>WhatsApp Nigeria (+234 802 829 9093)</span>
+              </a>
+              <a
+                href="https://wa.me/447729412585"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-3 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded-md flex items-center justify-center gap-2 transition-colors cursor-pointer border border-white/15"
+              >
+                <MessageCircle size={16} />
+                <span>WhatsApp UK (+44 7729 412585)</span>
               </a>
             </div>
           </div>
 
           {/* Right: Contact Form */}
-          <div className="lg:col-span-7 bg-white p-8 md:p-12 border border-gray-200 shadow-sm">
+          <div className="lg:col-span-7 bg-white p-8 md:p-10 border border-[#E8E5DE] rounded-lg shadow-xs">
             {submitted ? (
               <div className="text-center py-16">
-                <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
                   ✓
                 </div>
-                <h3 className="font-playfair text-2xl text-[var(--color-brand-navy)] mb-2">Message Dispatched</h3>
-                <p className="text-gray-500 font-light text-xs max-w-sm mx-auto mb-6">
-                  Thank you, {form.name}. Our styling and customer care team will respond within 2 business hours.
+                <h3 className="font-playfair text-2xl text-[#11141A] mb-2">Message Sent</h3>
+                <p className="text-stone-600 font-light text-xs max-w-sm mx-auto mb-6">
+                  Thank you, {form.name}. We have received your inquiry and will get back to you shortly.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 border border-gray-300 text-xs uppercase tracking-widest font-semibold hover:border-black"
+                  className="px-5 py-2.5 border border-stone-300 text-xs font-medium hover:border-black transition-colors rounded"
                 >
-                  Send Another Inquiry
+                  Send Another Message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <h3 className="font-playfair text-2xl text-[var(--color-brand-charcoal)] mb-4">
+              <form onSubmit={handleSubmit} className="space-y-5 text-xs">
+                <h3 className="font-playfair text-2xl text-[#11141A] mb-4">
                   Send a Message
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">Your Full Name *</label>
+                    <label className="block text-xs text-stone-700 mb-1.5 font-medium">Your Name *</label>
                     <input
                       type="text"
                       required
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="Adaeze Okonkwo"
-                      className="w-full h-11 border border-gray-300 px-4 text-sm font-light focus:outline-none focus:border-[var(--color-brand-navy)]"
+                      placeholder="e.g. Adaeze Okonkwo"
+                      className="w-full h-10 border border-stone-300 rounded px-3 text-xs focus:outline-none focus:border-stone-800"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">Email Address *</label>
+                    <label className="block text-xs text-stone-700 mb-1.5 font-medium">Email Address *</label>
                     <input
                       type="email"
                       required
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="adaeze@example.com"
-                      className="w-full h-11 border border-gray-300 px-4 text-sm font-light focus:outline-none focus:border-[var(--color-brand-navy)]"
+                      placeholder="name@example.com"
+                      className="w-full h-10 border border-stone-300 rounded px-3 text-xs focus:outline-none focus:border-stone-800"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">Phone Number</label>
+                    <label className="block text-xs text-stone-700 mb-1.5 font-medium">Phone Number</label>
                     <input
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+234 803 000 0000"
-                      className="w-full h-11 border border-gray-300 px-4 text-sm font-light focus:outline-none focus:border-[var(--color-brand-navy)]"
+                      placeholder="+234 or +44..."
+                      className="w-full h-10 border border-stone-300 rounded px-3 text-xs focus:outline-none focus:border-stone-800"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">Subject of Inquiry</label>
+                    <label className="block text-xs text-stone-700 mb-1.5 font-medium">Subject</label>
                     <select
                       value={form.subject}
                       onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                      className="w-full h-11 border border-gray-300 px-4 text-xs font-light focus:outline-none focus:border-[var(--color-brand-navy)] bg-white"
+                      className="w-full h-10 border border-stone-300 rounded px-3 text-xs focus:outline-none focus:border-stone-800 bg-white"
                     >
-                      <option>Bespoke Order / Sizing Inquiry</option>
-                      <option>Delivery & Tracking Status</option>
-                      <option>Wholesale & Corporate Gifting</option>
+                      <option>Product & Order Inquiry</option>
+                      <option>Delivery & Shipping</option>
                       <option>Returns & Exchanges</option>
-                      <option>Press & Collaborations</option>
+                      <option>Wholesale & Partnerships</option>
+                      <option>General Question</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-gray-500 mb-1 font-semibold">Your Message *</label>
+                  <label className="block text-xs text-stone-700 mb-1.5 font-medium">Message *</label>
                   <textarea
                     required
                     rows={5}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="How may our concierge assist you today?"
-                    className="w-full border border-gray-300 p-4 text-sm font-light focus:outline-none focus:border-[var(--color-brand-navy)]"
+                    placeholder="How can we help you?"
+                    className="w-full border border-stone-300 rounded p-3 text-xs focus:outline-none focus:border-stone-800"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[var(--color-brand-navy)] text-white text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--color-brand-purple)] transition-colors shadow"
+                  className="w-full py-3 bg-[#11141A] text-white text-xs uppercase tracking-widest font-medium hover:bg-stone-800 transition-colors rounded cursor-pointer"
                 >
-                  Dispatch Inquiry →
+                  Send Message
                 </button>
               </form>
             )}
@@ -178,3 +222,4 @@ export default function ContactPage() {
     </main>
   );
 }
+

@@ -65,7 +65,7 @@ export default function ShippingPolicyPage() {
               Real-Time Tracking &amp; Concierge Updates
             </h3>
             <p className="text-xs text-gray-600">
-              Upon dispatch, you will immediately receive an automated email, SMS, and WhatsApp notification containing your courier tracking number and real-time transit link. For urgent inquiries, reach out to our concierge via WhatsApp in Lagos (+234) or London (+44).
+              Upon dispatch, you will immediately receive an automated email and WhatsApp notification containing your courier tracking number and real-time transit link. For urgent inquiries, reach out to our team via WhatsApp in Lagos (+234 802 829 9093) or London (+44 7729 412585).
             </p>
           </div>
         </div>

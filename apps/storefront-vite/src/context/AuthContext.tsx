@@ -6,6 +6,7 @@ export interface UserAddress {
   addressLine1: string;
   city: string;
   state: string;
+  postalCode?: string;
   isDefault: boolean;
 }
 

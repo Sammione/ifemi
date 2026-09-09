@@ -237,18 +237,18 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
           {/* Quantity & CTAs */}
           <div className="flex flex-col gap-3 mb-8">
             <div className="flex gap-3">
-              <div className="flex items-center border border-gray-300 bg-white px-3 py-2 shrink-0">
+              <div className="flex items-center border border-stone-300 bg-white px-3 py-2 shrink-0">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="text-gray-500 hover:text-black px-2 py-1"
+                  className="text-stone-500 hover:text-black px-2 py-1 cursor-pointer"
                   aria-label="Decrease quantity"
                 >
                   −
                 </button>
-                <span className="w-8 text-center text-sm font-semibold">{quantity}</span>
+                <span className="w-8 text-center text-sm font-medium">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="text-gray-500 hover:text-black px-2 py-1"
+                  className="text-stone-500 hover:text-black px-2 py-1 cursor-pointer"
                   aria-label="Increase quantity"
                 >
                   +
@@ -257,29 +257,25 @@ export default function ProductDetailClient({ product }: ProductDetailProps) {
 
               <button
                 onClick={handleAddToCart}
-                className="flex-1 py-4 bg-[var(--color-brand-navy)] text-[var(--color-brand-cream)] text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--color-brand-purple)] transition-colors duration-300 shadow-md flex items-center justify-center gap-2"
+                className="flex-1 py-4 bg-[var(--color-brand-navy)] text-white text-xs uppercase tracking-[0.2em] font-medium hover:bg-black transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
-                </svg>
-                Add to Bag • ₦ {((product.salePrice || product.price) * quantity).toLocaleString()}
+                <span>Add to Bag • {formatPrice((product.salePrice || product.price) * quantity)}</span>
               </button>
             </div>
 
             <button
               onClick={handleBuyNow}
-              className="w-full py-3.5 bg-[var(--color-brand-purple)] text-white text-xs uppercase tracking-[0.2em] font-bold hover:opacity-90 transition-opacity shadow"
+              className="w-full py-3.5 border border-[var(--color-brand-navy)] text-[var(--color-brand-navy)] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[var(--color-brand-navy)] hover:text-white transition-colors cursor-pointer"
             >
-              Instant Checkout with Paystack →
+              Proceed to Checkout
             </button>
           </div>
 
-          {/* Guarantee Badges */}
-          <div className="bg-white p-4 border border-gray-200 mb-8 grid grid-cols-2 gap-3 text-xs text-gray-600 font-light">
-            <div className="flex items-center gap-2"><span>🚚</span><span>Lagos & Nationwide Delivery</span></div>
-            <div className="flex items-center gap-2"><span>✨</span><span>Hand-Finished Nigerian Silk</span></div>
-            <div className="flex items-center gap-2"><span>🔒</span><span>Paystack 256-Bit Encryption</span></div>
-            <div className="flex items-center gap-2"><span>🔄</span><span>7-Day Return & Exchange Policy</span></div>
+          {/* Sizing and Care Note */}
+          <div className="p-4 bg-stone-50 border border-stone-200 mb-8 text-xs text-stone-600 font-light space-y-1">
+            <p>• Handcrafted in limited batches with natural and silk blends.</p>
+            <p>• Complimentary tracked shipping in Nigeria and the UK.</p>
+            <p>• 7-day return and exchange policy on all unworn garments.</p>
           </div>
 
           {/* Accordion Tabs */}

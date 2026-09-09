@@ -1,4 +1,5 @@
-import {  Link , useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useCurrency } from '../../../context/CurrencyContext';
 
 interface CategoryMeta {
   name: string;
@@ -9,85 +10,87 @@ interface CategoryMeta {
     id: string;
     name: string;
     price: number;
+    priceGBP?: number;
     salePrice?: number | null;
+    salePriceGBP?: number | null;
     image: string;
-    tag?: string;
   }[];
 }
 
 const categoryData: Record<string, CategoryMeta> = {
   kaftans: {
     name: "Kaftans",
-    description: "Flowing silhouettes crafted for effortless grace. Our kaftans feature our signature One Size Fluid Drape designed to flatter UK 8 through UK 20.",
-    image: "/images/products/kaftan-1.svg",
+    description: "Flowing silhouettes in natural silk blends designed for fluid movement and ease.",
+    image: "/images/products/kaftan-1.jpg",
     items: [
-      { id: '1', name: 'Midnight Elegance Silk Kaftan', price: 45000, image: '/images/products/kaftan-1.svg', tag: 'Best Seller' },
-      { id: '7', name: 'Obsidian Velvet Evening Kaftan', price: 52000, image: '/images/products/kaftan-black.svg', tag: 'Limited' },
-      { id: '1', name: 'Gold Filigree Artisanal Kaftan', price: 48000, image: '/images/products/kaftan-2.svg' },
-      { id: '1', name: 'Royal Drape Sunset Kaftan', price: 46000, image: '/images/products/kaftan-3.svg' }
+      { id: '1', name: 'Silk Kaftan', price: 45000, priceGBP: 28, image: '/images/products/kaftan-1.jpg' },
+      { id: '7', name: 'Black Velvet Kaftan', price: 52000, priceGBP: 32, image: '/images/products/kaftan-black.jpg' },
+      { id: '10', name: 'Gold Trim Kaftan', price: 48000, priceGBP: 30, image: '/images/products/kaftan-2.jpg' },
+      { id: '1', name: 'Sunset Silk Kaftan', price: 46000, priceGBP: 29, image: '/images/products/kaftan-3.jpg' }
     ]
   },
   "trouser-sets": {
     name: "Trouser Sets",
-    description: "Tailored coordination. High-waisted trousers with pressed pleats and crossover blouses available in XS through XXL.",
+    description: "Tailored coordination. High-waisted trousers with matching blouses in breathable fabrics.",
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    image: "/images/products/trouser-1.svg",
+    image: "/images/products/trouser-1.jpg",
     items: [
-      { id: '2', name: 'Royal Purple Crepe Trouser Set', price: 65000, salePrice: 58000, image: '/images/products/trouser-1.svg', tag: 'Sale' },
-      { id: '8', name: 'Lapis Linen Tailored Two-Piece', price: 60000, image: '/images/products/trouser-blue.svg' },
-      { id: '2', name: 'Midnight Crossover Crepe Set', price: 65000, image: '/images/products/trouser-2.svg' }
+      { id: '2', name: 'Crepe Trouser Set', price: 65000, priceGBP: 40, salePrice: 58000, salePriceGBP: 36, image: '/images/products/trouser-1.jpg' },
+      { id: '8', name: 'Linen Trouser Set', price: 60000, priceGBP: 38, image: '/images/products/trouser-blue.jpg' },
+      { id: '11', name: 'Crossover Crepe Ensemble', price: 65000, priceGBP: 40, image: '/images/products/trouser-2.jpg' }
     ]
   },
   loungewear: {
     name: "Loungewear",
-    description: "Featherweight mulberry silk blends tailored for supreme comfort and relaxed daytime elegance.",
+    description: "Lightweight washed silk loungewear tailored for relaxed daytime elegance.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    image: "/images/products/loungewear-1.svg",
+    image: "/images/products/loungewear-1.jpg",
     items: [
-      { id: '3', name: 'Lavender Whisper Silk Loungewear', price: 35000, image: '/images/products/loungewear-1.svg', tag: 'New Arrival' },
-      { id: '3', name: 'Ivory Silk Lounge Two-Piece', price: 38000, image: '/images/products/trouser-1.svg' }
+      { id: '3', name: 'Silk Loungewear Set', price: 35000, priceGBP: 22, image: '/images/products/loungewear-1.jpg' },
+      { id: '3', name: 'Ivory Silk Lounge Two-Piece', price: 38000, priceGBP: 24, image: '/images/products/trouser-1.jpg' }
     ]
   },
   diffusers: {
-    name: "Diffusers",
-    description: "Botanical home fragrances hand-blended in Lagos with Nigerian cedar, royal oud, and golden amber.",
-    image: "/images/products/diffuser-1.svg",
+    name: "Diffusers & Scents",
+    description: "Botanical home fragrances blended with cedar, agarwood, and amber resin.",
+    image: "/images/products/diffuser-1.jpg",
     items: [
-      { id: '5', name: 'Royal Oud & Amber Home Diffuser', price: 22000, image: '/images/products/diffuser-1.svg', tag: 'Bestseller' },
-      { id: '9', name: 'Sandalwood & Vanilla Reed Diffuser', price: 22000, image: '/images/products/diffuser-2.svg' }
+      { id: '5', name: 'Amber & Oud Diffuser', price: 22000, priceGBP: 15, image: '/images/products/diffuser-1.jpg' },
+      { id: '9', name: 'Sandalwood Diffuser', price: 22000, priceGBP: 15, image: '/images/products/diffuser-2.jpg' }
     ]
   },
   cushions: {
     name: "Cushions",
-    description: "Textured artisanal cotton cushions handwoven by master Nigerian weavers with geometric motifs.",
-    image: "/images/products/cushion-1.svg",
+    description: "Textured cotton cushions handwoven with geometric motifs.",
+    image: "/images/products/cushion-1.jpg",
     items: [
-      { id: '4', name: 'Handwoven Artisanal Cushion Set', price: 18000, salePrice: 15000, image: '/images/products/cushion-1.svg' },
-      { id: '4', name: 'Geometric Motif Woven Cushion', price: 16000, image: '/images/products/cushion-2.svg' }
+      { id: '4', name: 'Woven Cushion', price: 18000, priceGBP: 12, salePrice: 15000, salePriceGBP: 10, image: '/images/products/cushion-1.jpg' },
+      { id: '12', name: 'Textured Geometric Cushion', price: 16000, priceGBP: 11, image: '/images/products/cushion-2.jpg' }
     ]
   },
   jewellery: {
     name: "Jewellery",
-    description: "Handcrafted sculptural brass drop earrings and modern minimalist adornments.",
-    image: "/images/products/jewellery-1.svg",
+    description: "Sculptural drop earrings cast in solid recycled brass.",
+    image: "/images/products/jewellery-1.jpg",
     items: [
-      { id: '6', name: 'Sculptural Brass Statement Earrings', price: 18500, image: '/images/products/jewellery-1.svg' },
-      { id: '6', name: 'Handcrafted Brass Drop Earrings', price: 17000, image: '/images/products/jewellery-2.svg' }
+      { id: '6', name: 'Brass Drop Earrings', price: 18500, priceGBP: 12, image: '/images/products/jewellery-1.jpg' },
+      { id: '6', name: 'Artisan Brass Hoops', price: 17000, priceGBP: 11, image: '/images/products/jewellery-2.jpg' }
     ]
   },
 };
 
 export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { formatPrice } = useCurrency();
   const category = slug ? categoryData[slug] : undefined;
 
   if (!category) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-[var(--color-brand-cream)] pt-28">
-        <div className="text-center bg-white p-12 border border-gray-200 shadow-sm max-w-md">
-          <h1 className="font-playfair text-3xl text-[var(--color-brand-navy)] mb-4">Category Not Found</h1>
-          <p className="text-xs text-gray-500 font-light mb-6">The requested collection does not exist.</p>
-          <Link to="/categories" className="px-6 py-3 bg-[var(--color-brand-navy)] text-white uppercase tracking-widest text-xs font-bold hover:bg-[var(--color-brand-purple)] transition-colors">
+        <div className="text-center p-12 border border-stone-200 max-w-md bg-white">
+          <h1 className="font-playfair text-2xl text-[var(--color-brand-navy)] mb-4 font-normal">Category Not Found</h1>
+          <p className="text-xs text-stone-500 font-light mb-6">The requested collection does not exist.</p>
+          <Link to="/categories" className="px-6 py-3 bg-[var(--color-brand-navy)] text-white uppercase tracking-widest text-xs font-medium hover:bg-black transition-colors">
             ← View All Categories
           </Link>
         </div>
@@ -96,76 +99,71 @@ export default function CategoryPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--color-brand-cream)] pt-28 px-4 md:px-12 lg:px-24 pb-24">
+    <main className="min-h-screen bg-[var(--color-brand-cream)] pt-32 px-6 md:px-12 max-w-7xl mx-auto pb-24 text-[var(--color-brand-navy)]">
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400 mb-8">
-        <Link to="/" className="hover:text-[var(--color-brand-navy)] transition-colors">Home</Link>
+      <nav className="flex items-center gap-2 text-xs uppercase tracking-widest text-stone-400 mb-8">
+        <Link to="/" className="hover:text-black transition-colors">Home</Link>
         <span>/</span>
-        <Link to="/categories" className="hover:text-[var(--color-brand-navy)] transition-colors">Categories</Link>
+        <Link to="/categories" className="hover:text-black transition-colors">Categories</Link>
         <span>/</span>
-        <span className="text-[var(--color-brand-charcoal)] font-semibold">{category.name}</span>
+        <span className="text-stone-800 font-medium">{category.name}</span>
       </nav>
 
       {/* Header */}
-      <header className="mb-14 max-w-2xl border-b border-gray-200 pb-8">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-brand-purple)] font-bold">
-          Ifẹ́mi Collection
+      <header className="mb-14 max-w-xl border-b border-[var(--color-brand-border)] pb-8">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] font-normal block mb-2">
+          Collection
         </span>
-        <h1 className="font-playfair text-4xl md:text-5xl text-[var(--color-brand-navy)] mt-2 mb-4">
+        <h1 className="font-playfair text-4xl md:text-5xl font-normal text-[var(--color-brand-navy)] mb-3">
           {category.name}
         </h1>
-        <p className="text-gray-500 font-light text-sm leading-relaxed">{category.description}</p>
+        <p className="text-stone-600 font-light text-sm leading-relaxed">{category.description}</p>
         {category.sizes && (
           <div className="mt-4 flex gap-2 flex-wrap items-center">
-            <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Available Sizes:</span>
+            <span className="text-[10px] uppercase tracking-wider text-stone-400 font-medium">Sizes:</span>
             {category.sizes.map((s) => (
-              <span key={s} className="px-2.5 py-0.5 border border-gray-300 text-[10px] text-gray-700 font-bold bg-white">{s}</span>
+              <span key={s} className="px-2.5 py-0.5 border border-stone-300 text-[10px] text-stone-700 font-medium bg-white">{s}</span>
             ))}
           </div>
         )}
       </header>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
         {category.items.map((item, idx) => (
-          <div key={idx} className="group bg-white p-4 border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
-            <div className="aspect-[3/4] w-full bg-gray-100 relative overflow-hidden mb-4 shadow-sm">
-              {item.tag && (
-                <span className="absolute top-3 left-3 z-10 text-[9px] uppercase tracking-widest font-bold px-2.5 py-0.5 bg-[var(--color-brand-purple)] text-white shadow">
-                  {item.tag}
-                </span>
-              )}
+          <div key={idx} className="group flex flex-col">
+            <div className="aspect-[3/4] w-full bg-stone-100 relative overflow-hidden mb-4">
               <Link to={`/shop/${item.id}`} className="block w-full h-full">
                 <img
                   src={item.image}
                   alt={item.name}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </Link>
             </div>
 
-            <div>
-              <span className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">{category.name}</span>
+            <div className="flex flex-col flex-1">
+              <span className="text-[10px] uppercase tracking-widest text-[var(--color-brand-muted)] mb-1">{category.name}</span>
               <Link to={`/shop/${item.id}`}>
-                <h3 className="font-playfair text-lg text-[var(--color-brand-charcoal)] group-hover:text-[var(--color-brand-purple)] transition-colors mt-0.5">
+                <h3 className="font-playfair text-base text-[var(--color-brand-navy)] hover:text-stone-500 transition-colors mb-2 line-clamp-1 font-normal">
                   {item.name}
                 </h3>
               </Link>
-              <div className="mt-3 flex items-center justify-between pt-2 border-t border-gray-100">
+              <div className="mt-auto pt-1 flex items-center justify-between text-xs">
                 <div className="flex items-baseline gap-2">
-                  <span className="font-light text-sm text-[var(--color-brand-navy)]">
-                    ₦ {(item.salePrice || item.price).toLocaleString()}
+                  <span className="font-medium text-stone-900">
+                    {formatPrice(item.salePrice || item.price, item.salePriceGBP || item.priceGBP)}
                   </span>
                   {item.salePrice && (
-                    <span className="text-xs text-gray-400 line-through">
-                      ₦ {item.price.toLocaleString()}
+                    <span className="text-[11px] text-stone-400 line-through">
+                      {formatPrice(item.price, item.priceGBP)}
                     </span>
                   )}
                 </div>
-                <Link to={`/shop/${item.id}`} className="text-[10px] uppercase tracking-widest font-bold text-[var(--color-brand-purple)] hover:underline">
-                  View Piece →
+                <Link to={`/shop/${item.id}`} className="text-[10px] uppercase tracking-widest text-stone-400 hover:text-black transition-colors">
+                  Details
                 </Link>
               </div>
             </div>

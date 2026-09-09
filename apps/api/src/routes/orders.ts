@@ -1,9 +1,80 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '../db';
+import { store, OrderRecord } from '../store';
 
 const router = Router();
 
-// Create Order (Checkout) with cross-border support (Nigeria & UK)
+// 1. GET all orders (for Admin backoffice)
+router.get('/', async (req: Request, res: Response): Promise<any> => {
+  try {
+    const dbOrders = await prisma.order.findMany({
+      include: {
+        items: true,
+        user: true,
+        shippingAddress: true
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    if (dbOrders && dbOrders.length > 0) {
+      return res.json(dbOrders);
+    }
+  } catch (error) {
+    // Fallback to store
+  }
+
+  const { status, search } = req.query;
+  let orders = store.getAllOrders();
+
+  if (status && String(status).toUpperCase() !== 'ALL') {
+    orders = orders.filter(o => o.orderStatus === String(status).toUpperCase());
+  }
+
+  if (search) {
+    const q = String(search).toLowerCase();
+    orders = orders.filter(
+      o => o.orderNumber.toLowerCase().includes(q) ||
+           o.customerName.toLowerCase().includes(q) ||
+           o.email.toLowerCase().includes(q) ||
+           (o.trackingNumber && o.trackingNumber.toLowerCase().includes(q))
+    );
+  }
+
+  res.json(orders);
+});
+
+// 2. GET single order by id or orderNumber
+router.get('/:id', async (req: Request, res: Response): Promise<any> => {
+  const id = String(req.params.id);
+
+  try {
+    const dbOrder = await prisma.order.findFirst({
+      where: {
+        OR: [{ id }, { orderNumber: id }]
+      },
+      include: {
+        items: true,
+        user: true,
+        shippingAddress: true
+      }
+    });
+
+    if (dbOrder) {
+      return res.json(dbOrder);
+    }
+  } catch (error) {
+    // Fallback to store
+  }
+
+  const order = store.getOrderById(id);
+  if (!order) {
+    return res.status(404).json({ error: 'Order not found' });
+  }
+
+  res.json(order);
+});
+
+// 3. POST create Order (Checkout)
 router.post('/', async (req: Request, res: Response): Promise<any> => {
   try {
     const {
@@ -13,122 +84,92 @@ router.post('/', async (req: Request, res: Response): Promise<any> => {
       billingAddress,
       email,
       phone,
-      currency = 'NGN', // 'NGN' | 'GBP'
-      shippingRegion = 'NIGERIA' // 'NIGERIA' | 'UK' | 'INTERNATIONAL'
+      currency = 'NGN',
+      shippingRegion = 'NIGERIA'
     } = req.body;
 
-    // Delivery fee based on region and currency
+    // Delivery fee
     let deliveryFee = 0;
     if (currency === 'GBP') {
-      if (shippingRegion === 'UK') {
-        deliveryFee = 6.50; // Royal Mail / DPD Tracked
-      } else if (shippingRegion === 'NIGERIA') {
-        deliveryFee = 15.00;
-      } else {
-        deliveryFee = 25.00; // International DHL
-      }
+      deliveryFee = shippingRegion === 'UK' ? 6.50 : 15.00;
     } else {
-      // NGN
-      if (shippingRegion === 'UK') {
-        deliveryFee = 12000;
-      } else if (shippingRegion === 'NIGERIA') {
-        deliveryFee = 3500; // Lagos / Nationwide express
-      } else {
-        deliveryFee = 35000; // Global DHL
-      }
+      deliveryFee = shippingRegion === 'NIGERIA' ? 3500 : 12000;
     }
 
     let subtotal = 0;
-    const orderItemsData = [];
+    const orderItems = [];
 
     for (const item of cartItems) {
       const price = Number(item.price) || 0;
-      subtotal += price * (item.quantity || 1);
-      orderItemsData.push({
-        productId: item.productId || item.id,
-        variantId: item.variantId || null,
-        name: item.name || 'Item',
-        quantity: item.quantity || 1,
-        priceAtPurchase: price
+      const quantity = Number(item.quantity) || 1;
+      subtotal += price * quantity;
+      orderItems.push({
+        productId: item.productId || item.id || '',
+        name: item.name || 'Artisanal Piece',
+        quantity,
+        price,
+        size: item.size,
+        color: item.color,
+        sku: item.sku
       });
     }
 
     const totalAmount = subtotal + deliveryFee;
-    const prefix = currency === 'GBP' ? 'ORD-UK' : 'ORD-NG';
-    const orderNumber = `${prefix}-${Date.now().toString().slice(-6)}`;
+    const prefix = currency === 'GBP' ? 'IFEMI-UK' : 'IFEMI-NG';
+    const orderNumber = `${prefix}-${Math.floor(10000 + Math.random() * 90000)}`;
 
-    try {
-      const dbOrder = await prisma.order.create({
-        data: {
-          orderNumber,
-          userId: userId || null,
-          subtotal,
-          deliveryFee,
-          totalAmount,
-          paymentStatus: 'PENDING',
-          orderStatus: 'PENDING',
-          items: {
-            create: orderItemsData.map(i => ({
-              productId: i.productId,
-              variantId: i.variantId,
-              quantity: i.quantity,
-              priceAtPurchase: i.priceAtPurchase
-            }))
-          }
-        }
-      });
-      return res.status(201).json(dbOrder);
-    } catch (dbErr) {
-      // Fallback in-memory order response when DB is offline
-      const simulatedOrder = {
-        id: `sim_${Date.now()}`,
-        orderNumber,
-        userId: userId || null,
-        email: email || 'guest@example.com',
-        phone: phone || '',
-        currency,
-        shippingRegion,
-        shippingAddress: shippingAddress || {},
-        billingAddress: billingAddress || shippingAddress || {},
-        subtotal,
-        deliveryFee,
-        totalAmount,
-        paymentStatus: 'PENDING',
-        orderStatus: 'CONFIRMED',
-        items: orderItemsData,
-        createdAt: new Date().toISOString()
-      };
-      return res.status(201).json(simulatedOrder);
-    }
+    const customerName = shippingAddress?.fullName ||
+      (shippingAddress?.firstName ? `${shippingAddress.firstName} ${shippingAddress.lastName || ''}`.trim() : 'Guest Client');
+
+    const newOrder = store.createOrder({
+      orderNumber,
+      userId: userId || null,
+      customerName,
+      email: email || shippingAddress?.email || 'guest@example.com',
+      phone: phone || shippingAddress?.phone || '',
+      currency,
+      subtotal,
+      deliveryFee,
+      totalAmount,
+      paymentStatus: 'PAID',
+      orderStatus: 'CONFIRMED',
+      deliveryStatus: `Order confirmed. Preparing dispatch to ${shippingAddress?.city || 'destination'}.`,
+      shippingRegion,
+      shippingAddress: {
+        fullName: customerName,
+        address: shippingAddress?.address || '',
+        city: shippingAddress?.city || '',
+        state: shippingAddress?.state || '',
+        phone: shippingAddress?.phone || phone || '',
+        country: shippingAddress?.country || (shippingRegion === 'UK' ? 'United Kingdom' : 'Nigeria'),
+        postalCode: shippingAddress?.postalCode
+      },
+      items: orderItems,
+      courier: shippingRegion === 'UK' ? 'Royal Mail Tracked 24' : 'GIG Logistics Express'
+    });
+
+    res.status(201).json(newOrder);
   } catch (error) {
-    console.error('Order creation failed:', error);
-    res.status(500).json({ error: 'Order creation failed' });
+    console.error('Failed to create order:', error);
+    res.status(500).json({ error: 'Failed to process order' });
   }
 });
 
-// Get User Orders
-router.get('/user/:userId', async (req: Request, res: Response): Promise<any> => {
+// 4. PATCH update order status (Admin)
+router.patch('/:id/status', async (req: Request, res: Response): Promise<any> => {
   try {
-    const { userId } = req.params;
+    const id = String(req.params.id);
+    const { status, courier, trackingNumber } = req.body;
 
-    try {
-      const orders = await prisma.order.findMany({
-        where: { userId },
-        include: {
-          items: {
-            include: { product: true, variant: true }
-          },
-          payments: true
-        },
-        orderBy: { createdAt: 'desc' }
-      });
-      return res.json(orders);
-    } catch (dbErr) {
-      return res.json([]);
+    const updated = store.updateOrderStatus(id, status, courier, trackingNumber);
+    if (!updated) {
+      return res.status(404).json({ error: 'Order not found' });
     }
+
+    res.json(updated);
   } catch (error) {
-    console.error('Failed to fetch orders:', error);
-    res.status(500).json({ error: 'Failed to fetch orders' });
+    console.error('Failed to update order status:', error);
+    res.status(500).json({ error: 'Failed to update order status' });
   }
 });
 

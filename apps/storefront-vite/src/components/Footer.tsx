@@ -23,32 +23,22 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           <div className="lg:col-span-5 flex flex-col items-start">
             <Logo light className="mb-6" />
-            <p className="text-white/70 font-light text-sm leading-relaxed max-w-sm">
-              Ifẹ́mi Lifestyle is a contemporary African luxury house operating between Lagos, Nigeria and London, United Kingdom. We celebrate modern femininity through handcrafted fluid kaftans, tailored sets, artisanal scents, and bespoke living.
+            <p className="text-white/60 font-light text-xs leading-relaxed max-w-sm">
+              Contemporary African luxury fashion and living objects. Crafted in limited quantities with natural fibres, tailored precision, and quiet elegance.
             </p>
-            <div className="mt-6 space-y-1.5 text-xs text-[var(--color-brand-lavender)]">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-white">Lagos Atelier:</span>
-                <span>Victoria Island, Lagos, Nigeria 🇳🇬</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-white">London Studio:</span>
-                <span>Mayfair, London, United Kingdom 🇬🇧</span>
-              </div>
-            </div>
           </div>
 
           <div className="lg:col-span-7 flex flex-col justify-center">
             <div className="bg-white/5 p-8 border border-white/10 max-w-xl ml-auto w-full">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-brand-lavender)] font-semibold">Join The Ifẹ́mi Circle</span>
-              <h3 className="font-playfair text-2xl text-white mt-1 mb-2">Receive Private Collection Previews</h3>
+              <span className="text-[10px] uppercase tracking-[0.25em] text-stone-400 font-normal">Newsletter</span>
+              <h3 className="font-playfair text-xl text-white mt-1 mb-2">Private Previews</h3>
               <p className="text-white/60 font-light text-xs mb-6">
-                Be the first to know about new arrivals, limited diffuser releases, and seasonal trunk shows.
+                Receive discreet notifications when new seasonal pieces and limited living objects arrive.
               </p>
 
               {subscribed ? (
-                <div className="p-3 bg-[var(--color-brand-purple)] text-white text-xs tracking-wider uppercase font-semibold text-center">
-                  Thank you for subscribing to Ifẹ́mi Lifestyle.
+                <div className="p-3 bg-white/10 text-white text-xs tracking-wider uppercase font-normal text-center">
+                  Thank you for subscribing.
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -58,11 +48,11 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
-                    className="flex-1 bg-white/10 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-[var(--color-brand-lavender)] font-light"
+                    className="flex-1 bg-white/10 border border-white/20 px-4 py-3 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-white font-light"
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 bg-[var(--color-brand-lavender)] text-[var(--color-brand-navy)] text-xs uppercase tracking-widest font-bold hover:bg-white transition-colors"
+                    className="px-6 py-3 bg-white text-[var(--color-brand-navy)] text-xs uppercase tracking-widest font-medium hover:bg-stone-200 transition-colors cursor-pointer"
                   >
                     Subscribe
                   </button>
@@ -72,14 +62,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 4-Column Navigation Links (Brief §28) */}
+        {/* 4-Column Navigation Links */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-16 border-b border-white/10 text-xs">
           {/* 1. Shop */}
           <div>
-            <h4 className="font-playfair text-base text-white tracking-wide uppercase mb-5">Shop</h4>
+            <h4 className="font-playfair text-sm text-white tracking-widest uppercase mb-5">Shop</h4>
             <ul className="space-y-3 font-light text-white/70">
-              <li><Link to="/shop" className="hover:text-white transition-colors">All Products</Link></li>
-              <li><Link to="/categories/kaftans" className="hover:text-white transition-colors">Kaftans (One Size)</Link></li>
+              <li><Link to="/shop" className="hover:text-white transition-colors">All Pieces</Link></li>
+              <li><Link to="/categories/kaftans" className="hover:text-white transition-colors">Kaftans</Link></li>
               <li><Link to="/categories/trouser-sets" className="hover:text-white transition-colors">Trouser Sets</Link></li>
               <li><Link to="/categories/loungewear" className="hover:text-white transition-colors">Loungewear</Link></li>
               <li><Link to="/categories/diffusers" className="hover:text-white transition-colors">Diffusers</Link></li>
@@ -90,33 +80,34 @@ export default function Footer() {
 
           {/* 2. Customer Care */}
           <div>
-            <h4 className="font-playfair text-base text-white tracking-wide uppercase mb-5">Customer Care</h4>
+            <h4 className="font-playfair text-sm text-white tracking-widest uppercase mb-5">Care</h4>
             <ul className="space-y-3 font-light text-white/70">
-              <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               <li><Link to="/shipping" className="hover:text-white transition-colors">Delivery Information</Link></li>
-              <li><Link to="/returns" className="hover:text-white transition-colors">Returns & Refunds</Link></li>
-              <li><Link to="/faq" className="hover:text-white transition-colors">Frequently Asked Questions</Link></li>
-              <li><Link to="/size-guide" className="hover:text-white transition-colors">Size & Fit Guide</Link></li>
-              <li><Link to="/account" className="hover:text-white transition-colors">My Account / Order History</Link></li>
+              <li><Link to="/returns" className="hover:text-white transition-colors">Returns &amp; Exchanges</Link></li>
+              <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link to="/size-guide" className="hover:text-white transition-colors">Size Guide</Link></li>
+              <li><Link to="/orders" className="hover:text-white transition-colors text-white font-medium">Track Orders</Link></li>
+              <li><Link to="/account" className="hover:text-white transition-colors">My Account</Link></li>
             </ul>
           </div>
 
           {/* 3. Company */}
           <div>
-            <h4 className="font-playfair text-base text-white tracking-wide uppercase mb-5">Company</h4>
+            <h4 className="font-playfair text-sm text-white tracking-widest uppercase mb-5">Company</h4>
             <ul className="space-y-3 font-light text-white/70">
-              <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/blog" className="hover:text-white transition-colors">Editorial & Lifestyle Blog</Link></li>
-              <li><Link to="/categories" className="hover:text-white transition-colors">Collections Overview</Link></li>
-              <li><a href="https://wa.me/2348000000000" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">WhatsApp Concierge</a></li>
+              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Editorial</Link></li>
+              <li><Link to="/categories" className="hover:text-white transition-colors">Collections</Link></li>
               <li className="pt-2">
                 <a
-                  href="http://localhost:3001"
+                  href="http://localhost:3002"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors inline-flex items-center gap-1 font-semibold text-[var(--color-brand-lavender)] text-[11px] uppercase tracking-wider"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1 text-stone-400 hover:text-white text-[10px] uppercase tracking-wider"
                 >
-                  <span>Staff / Admin Portal</span>
+                  <span>Admin Portal</span>
                   <span>↗</span>
                 </a>
               </li>

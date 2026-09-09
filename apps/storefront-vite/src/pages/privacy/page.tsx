@@ -38,9 +38,10 @@ export default function PrivacyPolicyPage() {
               For the purposes of the <strong>Nigeria Data Protection Act 2023 (NDPA)</strong> and applicable international data protection standards (including Regulation (EU) 2016/679 - GDPR), the Data Controller responsible for your personal information is:
             </p>
             <div className="bg-gray-50 p-4 border border-gray-200 text-xs text-gray-600 mt-3 space-y-1 font-mono">
-              <p><strong>Entity Name:</strong> Ifẹ́mi Lifestyle Ltd (RC No: 1984210)</p>
-              <p><strong>Registered Atelier & Office:</strong> Plot 14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria</p>
-              <p><strong>Data Protection Officer (DPO) Contact:</strong> privacy@ifemi.ng / dpo@ifemi.ng</p>
+              <p><strong>Entity Name:</strong> Ifẹ́mi Lifestyle Ltd</p>
+              <p><strong>Registered Office (Nigeria):</strong> 3/5 Ilaka Street, Off Coker Road, Ilupeju, Lagos, Nigeria</p>
+              <p><strong>UK Contact:</strong> 1654 Great Cambridge Road, Enfield Middlesex, EN1 4TA</p>
+              <p><strong>Contact Email:</strong> privacy@ifemi.com / support@ifemi.com</p>
             </div>
           </section>
 
