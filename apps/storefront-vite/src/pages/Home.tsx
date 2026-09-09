@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShoppingBag, Check, Heart } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
@@ -87,7 +87,34 @@ export default function Home() {
     }
   ];
 
-  const handleQuickAdd = (product: typeof featuredPieces[0]) => {
+  const [pieces, setPieces] = useState<any[]>(featuredPieces);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/products')
+      .then((res) => {
+        if (!res.ok) throw new Error('Network error');
+        return res.json();
+      })
+      .then((data: any[]) => {
+        if (isMounted && Array.isArray(data) && data.length > 0) {
+          const published = data.filter((d) => d.isPublished !== false);
+          const apiIds = new Set(published.map((d) => String(d.id)));
+          const additional = featuredPieces.filter((p) => !apiIds.has(String(p.id)));
+          // Show newest items first
+          setPieces([...published, ...additional]);
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not load products from API, using defaults:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleQuickAdd = (product: any) => {
     addItem({
       productId: product.id,
       name: product.name,
@@ -176,13 +203,13 @@ export default function Home() {
             to="/shop"
             className="text-xs uppercase tracking-[0.18em] text-[var(--color-brand-navy)] hover:text-stone-600 font-medium inline-flex items-center gap-2 transition-colors"
           >
-            <span>View All ({featuredPieces.length})</span>
+            <span>View All ({pieces.length})</span>
             <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredPieces.map((piece) => {
+          {pieces.slice(0, 8).map((piece) => {
             const isFav = isInWishlist(piece.id);
             const isAdded = addedId === piece.id;
 

@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "name": "gsjs",
+      "slug": "gsjs",
+      "category": "Kaftans",
+      "price": 45000,
+      "priceGBP": 28,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 15,
+      "threshold": 5,
+      "sku": "KAFTAN-BLU-614",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png"
+      ],
+      "colors": [
+        "Midnight Navy",
+        "Royal Purple"
+      ],
+      "sizes": [
+        "One Size (Fluid Drape)"
+      ],
+      "description": "Crafted with premium natural fibres and fluid drape.",
+      "fabricCare": "Gentle care recommended.",
+      "isPublished": true,
+      "isFeatured": false,
+      "id": "prod-1788963096074",
+      "salesCount": 0
+    },
+    {
       "id": "1",
       "name": "Silk Kaftan",
       "slug": "silk-kaftan",
@@ -384,5 +413,5 @@
       "featured": false
     }
   ],
-  "updatedAt": "2026-09-09T12:11:02.875Z"
+  "updatedAt": "2026-09-09T14:11:36.076Z"
 }
