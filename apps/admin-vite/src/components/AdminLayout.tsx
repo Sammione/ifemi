@@ -47,6 +47,8 @@ export const AdminLayout: React.FC<{ children: React.ReactNode; onOpenProductDra
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
+  const storefrontUrl = settings?.storefrontUrl || (import.meta as any).env?.VITE_STOREFRONT_URL || 'https://ifemi-storefront-vite.vercel.app';
+
   return (
     <div className="flex h-screen overflow-hidden bg-[#faf9f6] text-[#0b132b] font-sans">
       {/* Mobile Backdrop */}
@@ -119,17 +121,17 @@ export const AdminLayout: React.FC<{ children: React.ReactNode; onOpenProductDra
         {/* Bottom Storefront Link & User Profile */}
         <div className="p-3 border-t border-[#e8e5de] space-y-2 bg-stone-50/50">
           <a
-            href="http://localhost:3001"
+            href={storefrontUrl}
             target="_blank"
             rel="noreferrer"
             className="flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-stone-200 text-stone-700 hover:text-[#0b132b] hover:border-stone-400 transition-colors text-xs shadow-xs"
           >
             <span className="flex items-center gap-2">
-              <ExternalLink size={13} className="text-stone-500" />
-              <span className="font-medium">View Storefront</span>
+              <ExternalLink size={13} className="text-[#C5A880]" />
+              <span className="font-semibold text-stone-800">Visit Storefront</span>
             </span>
-            <span className="text-[10px] font-mono text-stone-400">
-              :3001
+            <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 font-semibold">
+              Live ↗
             </span>
           </a>
 
@@ -180,6 +182,21 @@ export const AdminLayout: React.FC<{ children: React.ReactNode; onOpenProductDra
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-3">
+            {/* Live Storefront Link */}
+            <a
+              href={storefrontUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 hover:text-[#0b132b] text-xs font-semibold shadow-xs transition-all"
+              title="Visit Live Storefront"
+            >
+              <ExternalLink size={13} className="text-[#C5A880]" />
+              <span className="hidden sm:inline">Store</span>
+              <span className="text-[10px] text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded font-mono font-bold">
+                ↗
+              </span>
+            </a>
+
             {/* Currency Toggle */}
             <div className="flex items-center bg-stone-100 rounded-xl border border-stone-200 p-1 text-xs font-semibold shadow-xs">
               <button

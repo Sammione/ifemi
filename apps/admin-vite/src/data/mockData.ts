@@ -120,6 +120,7 @@ export interface StoreSettings {
   paystackSecretKey: string;
   enableTestMode: boolean;
   currency: 'NGN' | 'GBP';
+  storefrontUrl?: string;
 }
 
 export const initialProducts: ProductItem[] = [
@@ -393,5 +394,6 @@ export const initialSettings: StoreSettings = {
   paystackPublicKey: 'pk_live_************************',
   paystackSecretKey: 'sk_live_************************',
   enableTestMode: false,
-  currency: 'NGN'
+  currency: 'NGN',
+  storefrontUrl: 'https://ifemi-storefront-vite.vercel.app'
 };

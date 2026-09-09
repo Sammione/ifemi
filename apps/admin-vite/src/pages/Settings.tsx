@@ -62,6 +62,27 @@ export const Settings: React.FC = () => {
             </div>
 
             <div>
+              <label className="block text-stone-700 font-semibold mb-1 flex items-center justify-between">
+                <span>Storefront Home URL</span>
+                <a
+                  href={formData.storefrontUrl || 'https://ifemi-storefront-vite.vercel.app'}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-amber-700 hover:underline font-medium"
+                >
+                  Visit ↗
+                </a>
+              </label>
+              <input
+                type="url"
+                value={formData.storefrontUrl || 'https://ifemi-storefront-vite.vercel.app'}
+                onChange={(e) => setFormData({ ...formData, storefrontUrl: e.target.value })}
+                className="w-full bg-stone-50 border border-stone-200 rounded-lg px-3 py-2 text-stone-900 font-mono text-xs focus:outline-none focus:border-stone-500"
+                placeholder="https://ifemi-storefront-vite.vercel.app"
+              />
+            </div>
+
+            <div>
               <label className="block text-stone-700 font-semibold mb-1">Tagline</label>
               <input
                 type="text"
