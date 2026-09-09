@@ -19,154 +19,16 @@ export interface CatalogProduct {
   sku: string;
 }
 
-const initialProducts: CatalogProduct[] = [
-  {
-    id: '1',
-    name: 'Silk Kaftan',
-    price: 45000,
-    priceGBP: 28,
-    category: 'Kaftans',
-    image: '/images/products/kaftan-1.jpg',
-    isOneSize: true,
-    stock: 14,
-    sku: 'KAFTAN-BLU-001'
-  },
-  {
-    id: '2',
-    name: 'Crepe Trouser Set',
-    price: 65000,
-    priceGBP: 40,
-    salePrice: 58000,
-    salePriceGBP: 36,
-    category: 'Trouser Sets',
-    image: '/images/products/trouser-1.jpg',
-    isOneSize: false,
-    stock: 8,
-    sku: 'TSET-PRP-002'
-  },
-  {
-    id: '3',
-    name: 'Silk Loungewear Set',
-    price: 35000,
-    priceGBP: 22,
-    category: 'Loungewear',
-    image: '/images/products/loungewear-1.jpg',
-    isOneSize: false,
-    stock: 12,
-    sku: 'LNG-LAV-003'
-  },
-  {
-    id: '4',
-    name: 'Woven Cushion',
-    price: 18000,
-    priceGBP: 12,
-    salePrice: 15000,
-    salePriceGBP: 10,
-    category: 'Cushions',
-    image: '/images/products/cushion-1.jpg',
-    isOneSize: true,
-    stock: 20,
-    sku: 'CSH-IVO-004'
-  },
-  {
-    id: '5',
-    name: 'Amber & Oud Diffuser',
-    price: 22000,
-    priceGBP: 15,
-    category: 'Diffusers',
-    image: '/images/products/diffuser-1.jpg',
-    isOneSize: true,
-    stock: 25,
-    sku: 'DIF-OUD-005'
-  },
-  {
-    id: '6',
-    name: 'Brass Drop Earrings',
-    price: 18500,
-    priceGBP: 12,
-    category: 'Jewellery',
-    image: '/images/products/jewellery-1.jpg',
-    isOneSize: true,
-    stock: 16,
-    sku: 'JWL-BRS-006'
-  },
-  {
-    id: '7',
-    name: 'Black Velvet Kaftan',
-    price: 52000,
-    priceGBP: 32,
-    category: 'Kaftans',
-    image: '/images/products/kaftan-black.jpg',
-    isOneSize: true,
-    stock: 6,
-    sku: 'KAFTAN-BLK-007'
-  },
-  {
-    id: '8',
-    name: 'Linen Trouser Set',
-    price: 60000,
-    priceGBP: 38,
-    category: 'Trouser Sets',
-    image: '/images/products/trouser-blue.jpg',
-    isOneSize: false,
-    stock: 9,
-    sku: 'TSET-BLU-008'
-  },
-  {
-    id: '9',
-    name: 'Sandalwood Diffuser',
-    price: 22000,
-    priceGBP: 15,
-    category: 'Diffusers',
-    image: '/images/products/diffuser-2.jpg',
-    isOneSize: true,
-    stock: 18,
-    sku: 'DIF-VAN-009'
-  },
-  {
-    id: '10',
-    name: 'Gold Trim Kaftan',
-    price: 48000,
-    priceGBP: 30,
-    category: 'Kaftans',
-    image: '/images/products/kaftan-2.jpg',
-    isOneSize: true,
-    stock: 11,
-    sku: 'KAFTAN-GLD-010'
-  },
-  {
-    id: '11',
-    name: 'Crossover Crepe Ensemble',
-    price: 65000,
-    priceGBP: 40,
-    category: 'Trouser Sets',
-    image: '/images/products/trouser-2.jpg',
-    isOneSize: false,
-    stock: 7,
-    sku: 'TSET-CRV-011'
-  },
-  {
-    id: '12',
-    name: 'Textured Geometric Cushion',
-    price: 16000,
-    priceGBP: 11,
-    category: 'Cushions',
-    image: '/images/products/cushion-2.jpg',
-    isOneSize: true,
-    stock: 15,
-    sku: 'CSH-GEO-012'
-  }
-];
-
 export default function ShopClient() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = searchParams.get('category') || 'All';
 
-  const [products, setProducts] = useState<CatalogProduct[]>(initialProducts);
+  const [products, setProducts] = useState<CatalogProduct[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [sortBy, setSortBy] = useState<string>('featured');
   const [maxPrice, setMaxPrice] = useState<number>(100000);
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const catFromUrl = searchParams.get('category');
@@ -193,15 +55,15 @@ export default function ShopClient() {
         return res.json();
       })
       .then((data) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          // Merge API data with initialProducts to preserve rich lookbook items
-          const apiIds = new Set(data.map((d: any) => String(d.id)));
-          const additionalInitial = initialProducts.filter(p => !apiIds.has(String(p.id)));
-          setProducts([...data, ...additionalInitial]);
+        if (isMounted && Array.isArray(data)) {
+          setProducts(data);
         }
       })
       .catch((err) => {
-        console.warn('Could not load products from API, using catalog cache:', err);
+        console.warn('Could not load products from API:', err);
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
       });
 
     return () => {
@@ -355,8 +217,22 @@ export default function ShopClient() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {filteredProducts.map((product) => {
+          {filteredProducts.length === 0 ? (
+            <div className="py-24 text-center border border-stone-200 bg-white/60 p-8 rounded-lg">
+              <p className="font-playfair text-2xl text-[var(--color-brand-navy)] mb-2">No pieces found</p>
+              <p className="text-xs text-stone-500 font-light mb-6">
+                There are currently no pieces matching this selection.
+              </p>
+              <button
+                onClick={() => { setSelectedCategory('All'); setSearchParams({}, { replace: true }); }}
+                className="px-6 py-2.5 bg-[var(--color-brand-navy)] text-white text-xs uppercase tracking-widest hover:bg-black transition-colors"
+              >
+                View All Pieces
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+              {filteredProducts.map((product) => {
               const isFavorited = isInWishlist(product.id);
               return (
                 <div key={product.id} className="group flex flex-col">
@@ -444,6 +320,7 @@ export default function ShopClient() {
               );
             })}
           </div>
+          )}
         </div>
       </div>
     </div>

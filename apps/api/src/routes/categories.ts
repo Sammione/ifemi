@@ -20,7 +20,7 @@ router.post('/', (req: Request, res: Response): any => {
   const created = store.createCategory({
     name,
     slug,
-    image: image || '/images/products/kaftan-1.jpg',
+    image: image || '',
     productsCount: 0,
     featured: Boolean(featured)
   });

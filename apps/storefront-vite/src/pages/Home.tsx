@@ -14,80 +14,34 @@ export default function Home() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
-  // Curated Signature Pieces with authentic photography and real names
-  const featuredPieces = [
-    {
-      id: '1',
-      name: 'Silk Kaftan',
-      category: 'Kaftans',
-      price: 45000,
-      priceGBP: 28,
-      sku: 'KAFTAN-BLU-001',
-      image: '/images/products/kaftan-1.jpg',
-      description: 'Mulberry silk blend with fluid drape and subtle piping.'
-    },
-    {
-      id: '2',
-      name: 'Crepe Trouser Set',
-      category: 'Trouser Sets',
-      price: 65000,
-      priceGBP: 40,
-      salePrice: 58000,
-      salePriceGBP: 36,
-      sku: 'TSET-PRP-002',
-      image: '/images/products/trouser-1.jpg',
-      description: 'High-waisted trousers with matching crossover blouse.'
-    },
-    {
-      id: '3',
-      name: 'Silk Loungewear Set',
-      category: 'Loungewear',
-      price: 35000,
-      priceGBP: 22,
-      sku: 'LNG-LAV-003',
-      image: '/images/products/loungewear-1.jpg',
-      description: 'Relaxed two-piece in lightweight washed silk.'
-    },
-    {
-      id: '5',
-      name: 'Amber & Oud Diffuser',
-      category: 'Objects',
-      price: 22000,
-      priceGBP: 15,
-      sku: 'DIF-OUD-005',
-      image: '/images/products/diffuser-1.jpg',
-      description: 'Cedarwood, agarwood, and amber resin in glass decanter.'
-    }
-  ];
-
   const editorialCategories = [
     {
       name: 'Kaftans',
       slug: 'kaftans',
-      image: '/images/products/kaftan-2.jpg',
-      count: '4 Silhouettes'
+      image: '',
+      count: 'Collection'
     },
     {
       name: 'Trouser Sets',
       slug: 'trouser-sets',
-      image: '/images/products/trouser-2.jpg',
-      count: '3 Silhouettes'
+      image: '',
+      count: 'Collection'
     },
     {
       name: 'Loungewear',
       slug: 'loungewear',
-      image: '/images/products/loungewear-1.jpg',
-      count: 'Pure Silk'
+      image: '',
+      count: 'Collection'
     },
     {
-      name: 'Objects & Scents',
+      name: 'Diffusers & Scents',
       slug: 'diffusers',
-      image: '/images/products/cushion-1.jpg',
-      count: 'Home Series'
+      image: '/images/products/diffuser-1.jpg',
+      count: 'Artisanal Scents'
     }
   ];
 
-  const [pieces, setPieces] = useState<any[]>(featuredPieces);
+  const [pieces, setPieces] = useState<any[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -97,16 +51,13 @@ export default function Home() {
         return res.json();
       })
       .then((data: any[]) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
+        if (isMounted && Array.isArray(data)) {
           const published = data.filter((d) => d.isPublished !== false);
-          const apiIds = new Set(published.map((d) => String(d.id)));
-          const additional = featuredPieces.filter((p) => !apiIds.has(String(p.id)));
-          // Show newest items first
-          setPieces([...published, ...additional]);
+          setPieces(published);
         }
       })
       .catch((err) => {
-        console.warn('Could not load products from API, using defaults:', err);
+        console.warn('Could not load products from API:', err);
       });
 
     return () => {
@@ -179,9 +130,9 @@ export default function Home() {
           <div className="lg:col-span-7 order-1 lg:order-2">
             <div className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/3] overflow-hidden bg-stone-100">
               <img
-                src="/images/products/kaftan-1.jpg"
-                alt="Silk Kaftan Editorial"
-                className="w-full h-full object-cover object-top filter contrast-[1.02]"
+                src="/images/products/diffuser-1.jpg"
+                alt="Artisanal Diffuser"
+                className="w-full h-full object-cover object-center filter contrast-[1.02]"
               />
             </div>
           </div>
@@ -296,8 +247,8 @@ export default function Home() {
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="aspect-[3/4] bg-stone-100 overflow-hidden">
               <img
-                src="/images/products/kaftan-3.jpg"
-                alt="Detail of fabric"
+                src="/images/products/diffuser-1.jpg"
+                alt="Artisanal Diffuser"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -359,14 +310,23 @@ export default function Home() {
             <Link
               key={cat.name}
               to={`/categories/${cat.slug}`}
-              className="group block relative aspect-[4/5] bg-stone-100 overflow-hidden"
+              className="group block relative aspect-[4/5] bg-[#0B132B] overflow-hidden rounded-xs"
             >
-              <img
-                src={cat.image}
-                alt={cat.name}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex flex-col justify-end p-6 text-white">
+              {cat.image ? (
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#0B132B] via-[#141F3D] to-[#0B132B] p-6 flex flex-col justify-between border border-stone-800/80">
+                  <span className="text-[10px] uppercase tracking-widest text-[#C5A880] font-mono">
+                    Ifẹ́mi
+                  </span>
+                  <div className="w-8 h-[1px] bg-[#C5A880]/30" />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
                 <span className="text-[10px] uppercase tracking-widest text-stone-300 mb-1">
                   {cat.count}
                 </span>

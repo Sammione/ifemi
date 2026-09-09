@@ -5,22 +5,22 @@ const categories = [
     name: "Kaftans",
     slug: "kaftans",
     description: "Flowing silhouettes in natural silk blends designed for fluid movement and comfort.",
-    count: "4 Silhouettes",
-    image: "/images/products/kaftan-1.jpg"
+    count: "Collection",
+    image: ""
   },
   {
     name: "Trouser Sets",
     slug: "trouser-sets",
     description: "Coordinated two-piece ensembles with high-waisted tailored trousers and crossover blouses.",
-    count: "3 Silhouettes",
-    image: "/images/products/trouser-1.jpg"
+    count: "Collection",
+    image: ""
   },
   {
     name: "Loungewear",
     slug: "loungewear",
     description: "Featherweight washed silk loungewear tailored for relaxed elegance.",
-    count: "Pure Silk",
-    image: "/images/products/loungewear-1.jpg"
+    count: "Collection",
+    image: ""
   },
   {
     name: "Diffusers",
@@ -33,15 +33,15 @@ const categories = [
     name: "Cushions",
     slug: "cushions",
     description: "Textured cotton cushions handwoven with geometric motifs.",
-    count: "Artisanal Weaves",
-    image: "/images/products/cushion-1.jpg"
+    count: "Collection",
+    image: ""
   },
   {
     name: "Jewellery",
     slug: "jewellery",
     description: "Sculptural drop earrings cast in solid recycled brass.",
-    count: "Hand-Cast Brass",
-    image: "/images/products/jewellery-1.jpg"
+    count: "Collection",
+    image: ""
   },
 ];
 
@@ -63,15 +63,24 @@ export default function CategoriesPage() {
           <Link
             key={category.slug}
             to={`/categories/${category.slug}`}
-            className="group bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden"
+            className="group bg-white border border-stone-200/80 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden"
           >
-            <div className="aspect-[4/3] w-full overflow-hidden relative bg-gray-100">
-              <img
-                src={category.image}
-                alt={category.name}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute top-3 right-3 bg-white/90 text-[var(--color-brand-navy)] text-[9px] uppercase font-bold tracking-widest px-2.5 py-1">
+            <div className="aspect-[4/3] w-full overflow-hidden relative bg-[#0B132B]">
+              {category.image ? (
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#0B132B] via-[#141F3D] to-[#0B132B] flex flex-col justify-between p-8 border-b border-stone-800">
+                  <span className="text-[10px] uppercase tracking-widest text-[#C5A880] font-mono">
+                    Ifẹ́mi Atelier
+                  </span>
+                  <div className="w-12 h-[1px] bg-[#C5A880]/30" />
+                </div>
+              )}
+              <div className="absolute top-3 right-3 bg-white/90 text-[var(--color-brand-navy)] text-[9px] uppercase font-bold tracking-widest px-2.5 py-1 backdrop-blur-xs">
                 {category.count}
               </div>
             </div>

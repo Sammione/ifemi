@@ -40,7 +40,7 @@ export const Products: React.FC = () => {
     colors: 'Midnight Navy, Royal Purple',
     sizes: 'One Size (Fluid Drape)',
     description: '',
-    image: '/images/products/kaftan-1.jpg',
+    image: '',
     isPublished: true,
     isFeatured: false
   });
@@ -107,7 +107,7 @@ export const Products: React.FC = () => {
       colors: 'Midnight Navy, Royal Purple',
       sizes: 'One Size (Fluid Drape)',
       description: 'Crafted with premium natural fibres and fluid drape.',
-      image: '/images/products/kaftan-1.jpg',
+      image: '',
       isPublished: true,
       isFeatured: false
     });

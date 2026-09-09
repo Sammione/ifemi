@@ -125,82 +125,6 @@ export interface StoreSettings {
 
 export const initialProducts: ProductItem[] = [
   {
-    id: '1',
-    name: 'Silk Kaftan',
-    slug: 'silk-kaftan',
-    category: 'Kaftans',
-    price: 45000,
-    priceGBP: 28,
-    sku: 'KAFTAN-BLU-001',
-    stock: 14,
-    threshold: 5,
-    isPublished: true,
-    isFeatured: true,
-    colors: ['Midnight Navy', 'Indigo'],
-    sizes: ['One Size'],
-    description: 'Mulberry silk blend with fluid drape and subtle metallic piping.',
-    image: '/images/products/kaftan-1.jpg',
-    salesCount: 48
-  },
-  {
-    id: '2',
-    name: 'Crepe Trouser Set',
-    slug: 'crepe-trouser-set',
-    category: 'Trouser Sets',
-    price: 65000,
-    priceGBP: 40,
-    salePrice: 58000,
-    salePriceGBP: 36,
-    sku: 'TSET-PRP-002',
-    stock: 4,
-    threshold: 5,
-    isPublished: true,
-    isFeatured: true,
-    colors: ['Royal Purple', 'Charcoal'],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    description: 'High-waisted trousers with matching crossover blouse.',
-    image: '/images/products/trouser-1.jpg',
-    salesCount: 34
-  },
-  {
-    id: '3',
-    name: 'Silk Loungewear Set',
-    slug: 'silk-loungewear-set',
-    category: 'Loungewear',
-    price: 35000,
-    priceGBP: 22,
-    sku: 'LNG-LAV-003',
-    stock: 12,
-    threshold: 5,
-    isPublished: true,
-    isFeatured: false,
-    colors: ['Lavender', 'Cream'],
-    sizes: ['XS', 'S', 'M', 'L'],
-    description: 'Featherweight washed silk two-piece designed for relaxed daytime comfort.',
-    image: '/images/products/loungewear-1.jpg',
-    salesCount: 22
-  },
-  {
-    id: '4',
-    name: 'Woven Cushion',
-    slug: 'woven-cushion',
-    category: 'Cushions',
-    price: 18000,
-    priceGBP: 12,
-    salePrice: 15000,
-    salePriceGBP: 10,
-    sku: 'CSH-IVO-004',
-    stock: 20,
-    threshold: 8,
-    isPublished: true,
-    isFeatured: false,
-    colors: ['Ivory', 'Charcoal'],
-    sizes: ['50x50cm'],
-    description: 'Textured cotton cushions handwoven with traditional geometric motifs.',
-    image: '/images/products/cushion-1.jpg',
-    salesCount: 65
-  },
-  {
     id: '5',
     name: 'Amber & Oud Diffuser',
     slug: 'amber-oud-diffuser',
@@ -208,7 +132,7 @@ export const initialProducts: ProductItem[] = [
     price: 22000,
     priceGBP: 15,
     sku: 'DIF-OUD-005',
-    stock: 2,
+    stock: 25,
     threshold: 6,
     isPublished: true,
     isFeatured: true,
@@ -217,24 +141,6 @@ export const initialProducts: ProductItem[] = [
     description: 'Botanical home fragrance infused with cedar, dark oud, and amber resin.',
     image: '/images/products/diffuser-1.jpg',
     salesCount: 51
-  },
-  {
-    id: '6',
-    name: 'Brass Drop Earrings',
-    slug: 'brass-drop-earrings',
-    category: 'Jewellery',
-    price: 18500,
-    priceGBP: 12,
-    sku: 'JWL-BRS-006',
-    stock: 0,
-    threshold: 5,
-    isPublished: true,
-    isFeatured: false,
-    colors: ['Polished Brass'],
-    sizes: ['One Size'],
-    description: 'Sculptural drop earrings cast in solid recycled brass with sterling silver posts.',
-    image: '/images/products/jewellery-1.jpg',
-    salesCount: 40
   }
 ];
 
@@ -249,14 +155,13 @@ export const initialOrders: OrderRecord[] = [
     city: 'Lagos',
     country: 'Nigeria',
     date: '2026-08-28 14:22',
-    total: 70000,
-    totalGBP: 44,
+    total: 22000,
+    totalGBP: 15,
     paymentStatus: 'PAID',
     orderStatus: 'SHIPPED',
     courier: 'GIG Logistics Express',
     trackingNumber: 'GIG-LAG-993821',
     items: [
-      { id: 'item-1', productId: '1', name: 'Midnight Elegance Silk Kaftan', quantity: 1, price: 45000, size: 'One Size', image: '/images/products/kaftan-1.jpg' },
       { id: 'item-2', productId: '5', name: 'Royal Oud & Amber Home Diffuser', quantity: 1, price: 22000, size: '250ml', image: '/images/products/diffuser-1.jpg' }
     ]
   },
@@ -270,16 +175,14 @@ export const initialOrders: OrderRecord[] = [
     city: 'Abuja',
     country: 'Nigeria',
     date: '2026-08-29 10:15',
-    total: 125000,
-    totalGBP: 78,
+    total: 44000,
+    totalGBP: 30,
     paymentStatus: 'PAID',
     orderStatus: 'PROCESSING',
     courier: 'DHL Air Priority',
     trackingNumber: 'DHL-ABJ-558291',
     items: [
-      { id: 'item-3', productId: '2', name: 'Royal Purple Crepe Trouser Set', quantity: 1, price: 58000, size: 'UK 12 (M)', image: '/images/products/trouser-1.jpg' },
-      { id: 'item-4', productId: '1', name: 'Midnight Elegance Silk Kaftan', quantity: 1, price: 45000, size: 'One Size', image: '/images/products/kaftan-1.jpg' },
-      { id: 'item-5', productId: '5', name: 'Royal Oud & Amber Home Diffuser', quantity: 1, price: 22000, size: '250ml', image: '/images/products/diffuser-1.jpg' }
+      { id: 'item-5', productId: '5', name: 'Royal Oud & Amber Home Diffuser', quantity: 2, price: 22000, size: '250ml', image: '/images/products/diffuser-1.jpg' }
     ]
   },
   {
@@ -292,56 +195,14 @@ export const initialOrders: OrderRecord[] = [
     city: 'Port Harcourt',
     country: 'Nigeria',
     date: '2026-08-29 16:40',
-    total: 45000,
-    totalGBP: 28,
+    total: 22000,
+    totalGBP: 15,
     paymentStatus: 'PAID',
     orderStatus: 'CONFIRMED',
     courier: 'RedStar Express',
     trackingNumber: 'RED-PHC-110293',
     items: [
-      { id: 'item-6', productId: '1', name: 'Midnight Elegance Silk Kaftan', quantity: 1, price: 45000, size: 'One Size', image: '/images/products/kaftan-1.jpg' }
-    ]
-  },
-  {
-    id: '4',
-    orderNumber: 'IFEMI-92840',
-    customerName: 'Zainab Dangote-Bello',
-    email: 'zainab.d@investments.co.uk',
-    phone: '+44 7700 900123',
-    destination: '42 Kensington High St, Flat 3B',
-    city: 'London',
-    country: 'United Kingdom',
-    date: '2026-08-27 18:05',
-    total: 180000,
-    totalGBP: 112,
-    paymentStatus: 'PAID',
-    orderStatus: 'DELIVERED',
-    courier: 'Royal Mail Special Delivery',
-    trackingNumber: 'RM-LDN-884920GB',
-    items: [
-      { id: 'item-7', productId: '2', name: 'Royal Purple Crepe Trouser Set', quantity: 2, price: 58000, size: 'UK 10 (S)', image: '/images/products/trouser-1.jpg' },
-      { id: 'item-8', productId: '3', name: 'Lavender Whisper Silk Loungewear', quantity: 1, price: 35000, size: 'UK 10 (S)', image: '/images/products/loungewear-1.jpg' },
-      { id: 'item-9', productId: '4', name: 'Handwoven Artisanal Cushion Set', quantity: 1, price: 15000, image: '/images/products/cushion-1.jpg' }
-    ]
-  },
-  {
-    id: '5',
-    orderNumber: 'IFEMI-92839',
-    customerName: 'Dr. Amina Bello',
-    email: 'amina.bello@lagosmed.org',
-    phone: '+234 809 333 4455',
-    destination: 'Parkview Estate, Ikoyi',
-    city: 'Lagos',
-    country: 'Nigeria',
-    date: '2026-08-26 11:30',
-    total: 58000,
-    totalGBP: 36,
-    paymentStatus: 'PAID',
-    orderStatus: 'DELIVERED',
-    courier: 'Lagos Dispatch Courier',
-    trackingNumber: 'LGS-IKY-22019',
-    items: [
-      { id: 'item-10', productId: '2', name: 'Royal Purple Crepe Trouser Set', quantity: 1, price: 58000, size: 'UK 14 (L)', image: '/images/products/trouser-1.jpg' }
+      { id: 'item-6', productId: '5', name: 'Royal Oud & Amber Home Diffuser', quantity: 1, price: 22000, size: '250ml', image: '/images/products/diffuser-1.jpg' }
     ]
   }
 ];
@@ -355,12 +216,12 @@ export const initialCustomers: CustomerRecord[] = [
 ];
 
 export const initialCategories: CategoryItem[] = [
-  { id: '1', name: 'Kaftans', slug: 'kaftans', description: 'Flowing ceremonial silks and fluid drape silhouettes.', productsCount: 14, featured: true, accentColor: '#475569' },
-  { id: '2', name: 'Trouser Sets', slug: 'trouser-sets', description: 'High-waisted tailored sets crafted in vibrant crepe.', productsCount: 8, featured: true, accentColor: '#334155' },
-  { id: '3', name: 'Loungewear', slug: 'loungewear', description: 'Silken relaxation two-pieces for refined living.', productsCount: 12, featured: true, accentColor: '#1e293b' },
-  { id: '4', name: 'Diffusers', slug: 'diffusers', description: 'Artisanal scents blending oud, cedarwood, and amber.', productsCount: 6, featured: false, accentColor: '#475569' },
-  { id: '5', name: 'Cushions', slug: 'cushions', description: 'Handcrafted textural cushions with traditional motifs.', productsCount: 9, featured: false, accentColor: '#334155' },
-  { id: '6', name: 'Jewellery', slug: 'jewellery', description: 'Architectural statement brass and sculptural earrings.', productsCount: 16, featured: false, accentColor: '#64748b' }
+  { id: '1', name: 'Kaftans', slug: 'kaftans', description: 'Flowing ceremonial silks and fluid drape silhouettes.', productsCount: 1, featured: true, accentColor: '#475569' },
+  { id: '2', name: 'Trouser Sets', slug: 'trouser-sets', description: 'High-waisted tailored sets crafted in vibrant crepe.', productsCount: 0, featured: true, accentColor: '#334155' },
+  { id: '3', name: 'Loungewear', slug: 'loungewear', description: 'Silken relaxation two-pieces for refined living.', productsCount: 0, featured: true, accentColor: '#1e293b' },
+  { id: '4', name: 'Diffusers', slug: 'diffusers', description: 'Artisanal scents blending oud, cedarwood, and amber.', productsCount: 1, featured: true, accentColor: '#475569' },
+  { id: '5', name: 'Cushions', slug: 'cushions', description: 'Handcrafted textural cushions with traditional motifs.', productsCount: 0, featured: false, accentColor: '#334155' },
+  { id: '6', name: 'Jewellery', slug: 'jewellery', description: 'Architectural statement brass and sculptural earrings.', productsCount: 0, featured: false, accentColor: '#64748b' }
 ];
 
 export const initialPromos: PromoCode[] = [
@@ -371,11 +232,8 @@ export const initialPromos: PromoCode[] = [
 ];
 
 export const initialReviews: ReviewItem[] = [
-  { id: '1', customerName: 'Dr. Amina Bello', productName: 'Midnight Elegance Silk Kaftan', rating: 5, comment: 'The fabric quality is truly magnificent. The drape and gold stitching made this piece a showstopper at my event in Abuja.', date: '2026-08-25', status: 'APPROVED', location: 'Abuja' },
-  { id: '2', customerName: 'Lady Chidinma Adeleke', productName: 'Royal Purple Crepe Trouser Set', rating: 5, comment: 'Flawless tailoring. The waistline and trousers fit perfectly without needing any alterations in Lagos.', date: '2026-08-27', status: 'APPROVED', location: 'Lagos' },
-  { id: '3', customerName: 'Ngozi Eze', productName: 'Royal Oud & Amber Home Diffuser', rating: 5, comment: 'The scent throw in my living room is intoxicating. Long-lasting and rich, everyone asks about it.', date: '2026-08-28', status: 'PENDING', location: 'Enugu' },
-  { id: '4', customerName: 'Anonymous Client', productName: 'Sculptural Brass Statement Earrings', rating: 4, comment: 'Earrings are slightly heavier than expected, but stunning sculptural presence.', date: '2026-08-20', status: 'APPROVED', location: 'London' },
-  { id: '5', customerName: 'Tolu Alabi', productName: 'Handwoven Artisanal Cushion Set', rating: 5, comment: 'Sublime artisanal feel. The geometric Yoruba motif elevates our entire sofa arrangement.', date: '2026-08-29', status: 'PENDING', location: 'Ibadan' }
+  { id: '1', customerName: 'Lady Chidinma Adeleke', productName: 'Amber & Oud Diffuser', rating: 5, comment: 'The scent throw in my living room is intoxicating. Long-lasting and rich, everyone asks about it.', date: '2026-08-28', status: 'APPROVED', location: 'Abuja' },
+  { id: '2', customerName: 'Dr. Amina Bello', productName: 'Amber & Oud Diffuser', rating: 5, comment: 'Magnificent botanical fragrance. Creates an instant atmosphere of luxury.', date: '2026-08-25', status: 'APPROVED', location: 'Lagos' }
 ];
 
 export const initialSettings: StoreSettings = {
