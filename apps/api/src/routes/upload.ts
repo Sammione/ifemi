@@ -5,19 +5,17 @@ import { v2 as cloudinary } from 'cloudinary';
 
 const router = Router();
 
-// Configure Cloudinary if environment variables or defaults are provided
+// Configure Cloudinary with live credentials
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'wugtledv';
-const apiKey = process.env.CLOUDINARY_API_KEY;
-const apiSecret = process.env.CLOUDINARY_API_SECRET;
+const apiKey = process.env.CLOUDINARY_API_KEY || '912873885738932';
+const apiSecret = process.env.CLOUDINARY_API_SECRET || 'wDLZJGhkXH7027Mb5Q5EyU0zKNU';
 
-if (process.env.CLOUDINARY_URL || (cloudName && apiKey && apiSecret)) {
-  cloudinary.config({
-    cloud_name: cloudName,
-    api_key: apiKey,
-    api_secret: apiSecret,
-    secure: true
-  });
-}
+cloudinary.config({
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
+  secure: true
+});
 
 // Fallback local upload directories
 const apiUploadsDir = path.join(__dirname, '..', '..', 'public', 'uploads');
