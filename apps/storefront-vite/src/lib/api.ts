@@ -3,7 +3,7 @@
 // pointing to your deployed API (e.g. https://your-api.railway.app)
 // In development: falls back to empty string so Vite proxy handles /api/* → localhost:4000
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ifemi-apdj.onrender.com';
 
 export async function apiFetch(path: string, options?: RequestInit) {
   const url = `${API_BASE_URL}${path}`;
