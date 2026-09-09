@@ -1,10 +1,25 @@
 import { Router, Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
 
 const router = Router();
 
-// Ensure upload directories exist
+// Configure Cloudinary if environment variables or defaults are provided
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME || 'wugtledv';
+const apiKey = process.env.CLOUDINARY_API_KEY;
+const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+if (process.env.CLOUDINARY_URL || (cloudName && apiKey && apiSecret)) {
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret,
+    secure: true
+  });
+}
+
+// Fallback local upload directories
 const apiUploadsDir = path.join(__dirname, '..', '..', 'public', 'uploads');
 const storefrontUploadsDir = path.join(__dirname, '..', '..', '..', 'storefront-vite', 'public', 'uploads');
 
@@ -18,7 +33,7 @@ const storefrontUploadsDir = path.join(__dirname, '..', '..', '..', 'storefront-
   }
 });
 
-router.post('/', (req: Request, res: Response): any => {
+router.post('/', async (req: Request, res: Response): Promise<any> => {
   try {
     const { base64, filename } = req.body;
 
@@ -26,7 +41,25 @@ router.post('/', (req: Request, res: Response): any => {
       return res.status(400).json({ error: 'No image data provided' });
     }
 
-    // Match data:[<mediatype>];base64,<data>
+    // 1. Try uploading to Cloudinary first if configured
+    if (process.env.CLOUDINARY_URL || (apiKey && apiSecret)) {
+      try {
+        const uploadResult = await cloudinary.uploader.upload(base64, {
+          folder: 'ifemi-lifestyle',
+          resource_type: 'image',
+          transformation: [{ quality: 'auto', fetch_format: 'auto' }]
+        });
+
+        return res.status(201).json({
+          url: uploadResult.secure_url,
+          filename: uploadResult.public_id
+        });
+      } catch (cloudErr) {
+        console.warn('Cloudinary upload encountered an error, falling back to local storage:', cloudErr);
+      }
+    }
+
+    // 2. Local disk fallback
     const matches = base64.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     let buffer: Buffer;
     let ext = 'jpg';
@@ -56,10 +89,10 @@ router.post('/', (req: Request, res: Response): any => {
     }
 
     const publicUrl = `/uploads/${cleanFilename}`;
-    res.status(201).json({ url: publicUrl, filename: cleanFilename });
+    return res.status(201).json({ url: publicUrl, filename: cleanFilename });
   } catch (error) {
     console.error('Failed to upload image:', error);
-    res.status(500).json({ error: 'Image upload failed' });
+    return res.status(500).json({ error: 'Image upload failed' });
   }
 });
 
