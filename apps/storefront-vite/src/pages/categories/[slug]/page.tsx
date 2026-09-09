@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useCurrency } from '../../../context/CurrencyContext';
 
@@ -82,7 +83,55 @@ const categoryData: Record<string, CategoryMeta> = {
 export default function CategoryPage() {
   const { slug } = useParams<{ slug: string }>();
   const { formatPrice } = useCurrency();
-  const category = slug ? categoryData[slug] : undefined;
+  const baseCategory = slug ? categoryData[slug] : undefined;
+
+  const [liveItems, setLiveItems] = useState<any[]>(baseCategory ? baseCategory.items : []);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (!slug) return;
+
+    fetch('/api/products')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch');
+        return res.json();
+      })
+      .then((data: any[]) => {
+        if (!isMounted || !Array.isArray(data)) return;
+
+        const normalizedSlug = slug.toLowerCase().replace(/-/g, ' ');
+        const matchingApiProducts = data.filter((p) => {
+          if (!p.category) return false;
+          const cat = p.category.toLowerCase();
+          return (
+            cat === normalizedSlug ||
+            cat === normalizedSlug + 's' ||
+            cat + 's' === normalizedSlug ||
+            cat.includes(normalizedSlug) ||
+            normalizedSlug.includes(cat)
+          );
+        });
+
+        if (matchingApiProducts.length > 0) {
+          const apiIds = new Set(matchingApiProducts.map((p) => String(p.id)));
+          const defaultItems = baseCategory
+            ? baseCategory.items.filter((p) => !apiIds.has(String(p.id)))
+            : [];
+          setLiveItems([...matchingApiProducts, ...defaultItems]);
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch category products from API:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug, baseCategory]);
+
+  const category = baseCategory
+    ? { ...baseCategory, items: liveItems }
+    : undefined;
 
   if (!category) {
     return (

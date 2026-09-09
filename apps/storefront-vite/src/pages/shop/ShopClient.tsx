@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useCurrency } from '../../context/CurrencyContext';
@@ -159,11 +159,31 @@ const initialProducts: CatalogProduct[] = [
 ];
 
 export default function ShopClient() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'All';
+
   const [products, setProducts] = useState<CatalogProduct[]>(initialProducts);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [sortBy, setSortBy] = useState<string>('featured');
   const [maxPrice, setMaxPrice] = useState<number>(100000);
   const [inStockOnly, setInStockOnly] = useState<boolean>(false);
+
+  useEffect(() => {
+    const catFromUrl = searchParams.get('category');
+    if (catFromUrl) {
+      setSelectedCategory(catFromUrl);
+    }
+  }, [searchParams]);
+
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    if (cat === 'All') {
+      searchParams.delete('category');
+      setSearchParams(searchParams, { replace: true });
+    } else {
+      setSearchParams({ category: cat }, { replace: true });
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -198,7 +218,18 @@ export default function ShopClient() {
   const filteredProducts = useMemo(() => {
     return products
       .filter((product) => {
-        if (selectedCategory !== 'All' && product.category.toLowerCase() !== selectedCategory.toLowerCase()) return false;
+        if (selectedCategory !== 'All') {
+          const pCat = (product.category || '').toLowerCase().trim();
+          const sCat = selectedCategory.toLowerCase().trim();
+          const matches =
+            pCat === sCat ||
+            pCat === sCat + 's' ||
+            pCat + 's' === sCat ||
+            pCat.replace(/\s+/g, '') === sCat.replace(/\s+/g, '') ||
+            pCat.includes(sCat) ||
+            sCat.includes(pCat);
+          if (!matches) return false;
+        }
         const currentPrice = product.salePrice || product.price;
         if (currentPrice > maxPrice) return false;
         if (inStockOnly && product.stock <= 0) return false;
@@ -212,7 +243,7 @@ export default function ShopClient() {
         if (sortBy === 'name') return a.name.localeCompare(b.name);
         return 0;
       });
-  }, [selectedCategory, sortBy, maxPrice, inStockOnly]);
+  }, [selectedCategory, sortBy, maxPrice, inStockOnly, products]);
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24 text-[var(--color-brand-navy)]">
@@ -240,7 +271,7 @@ export default function ShopClient() {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleCategorySelect(cat)}
                   className={`text-left py-1 transition-colors flex items-center justify-between ${
                     selectedCategory === cat
                       ? 'text-[var(--color-brand-navy)] font-semibold underline underline-offset-4'
