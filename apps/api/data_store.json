@@ -1,33 +1,320 @@
 {
   "products": [
     {
-      "name": "gsjs",
-      "slug": "gsjs",
+      "id": "prod-ikat-silk-kaftan",
+      "name": "Ikat Motif Silk Kaftan",
+      "slug": "ikat-silk-kaftan",
       "category": "Kaftans",
-      "price": 45000,
-      "priceGBP": 28,
+      "price": 52000,
+      "priceGBP": 32,
       "salePrice": null,
       "salePriceGBP": null,
-      "stock": 15,
-      "threshold": 5,
-      "sku": "KAFTAN-BLU-614",
-      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png",
+      "stock": 12,
+      "threshold": 4,
+      "sku": "KAFTAN-IKA-001",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg",
       "images": [
-        "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png"
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg",
+        "/images/products/kaftan-1.jpg"
       ],
       "colors": [
-        { "name": "Midnight Navy", "hex": "#0B132B", "bgClass": "bg-[#0B132B]" },
-        { "name": "Royal Purple", "hex": "#4B2E83", "bgClass": "bg-[#4B2E83]" }
+        {
+          "name": "Ruby & Gold",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Onyx",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
       ],
       "sizes": [
         "One Size (Fluid Drape)"
       ],
-      "description": "Crafted with premium natural fibres and fluid drape.",
-      "fabricCare": "Gentle care recommended.",
+      "description": "Handcrafted fluid silk kaftan featuring an intricate African ikat pattern with wide kimono drape.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
       "isPublished": true,
       "isFeatured": true,
-      "id": "prod-1788963096074",
-      "salesCount": 1
+      "salesCount": 14
+    },
+    {
+      "id": "prod-emerald-geometric-kaftan",
+      "name": "Emerald Geometric Silk Kaftan",
+      "slug": "emerald-geometric-kaftan",
+      "category": "Kaftans",
+      "price": 54000,
+      "priceGBP": 34,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "KAFTAN-EME-002",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966223/ifemi-lifestyle/emerald-geometric-kaftan.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966223/ifemi-lifestyle/emerald-geometric-kaftan.jpg",
+        "/images/products/kaftan-2.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Emerald Green",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Black & Ochre",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "One Size (Fluid Drape)"
+      ],
+      "description": "Striking geometric batik pattern on premium silk blend, designed for fluid movement and comfort.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 10
+    },
+    {
+      "id": "prod-burgundy-batik-kaftan",
+      "name": "Burgundy Batik Silhouette Kaftan",
+      "slug": "burgundy-batik-kaftan",
+      "category": "Kaftans",
+      "price": 48000,
+      "priceGBP": 30,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "KAFTAN-BUR-003",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966225/ifemi-lifestyle/burgundy-batik-kaftan.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966225/ifemi-lifestyle/burgundy-batik-kaftan.jpg",
+        "/images/products/kaftan-3.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Burgundy",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Sun Yellow",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "One Size (Fluid Drape)"
+      ],
+      "description": "Ceremonial silk kaftan with rich organic batik motifs, hand-dyed in warm earth tones.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 9
+    },
+    {
+      "id": "prod-magenta-mosaic-kaftan",
+      "name": "Mosaic Prism Silk Kaftan",
+      "slug": "magenta-mosaic-kaftan",
+      "category": "Kaftans",
+      "price": 55000,
+      "priceGBP": 35,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "KAFTAN-MAG-004",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966226/ifemi-lifestyle/magenta-mosaic-kaftan.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966226/ifemi-lifestyle/magenta-mosaic-kaftan.jpg",
+        "/images/products/kaftan-4.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Royal Blue",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Magenta & Amber",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "One Size (Fluid Drape)"
+      ],
+      "description": "Vibrant stained-glass mosaic silk print with signature open neckline and fluid side drapes.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 6
+    },
+    {
+      "id": "prod-earth-flora-silk-robe",
+      "name": "Earth Flora Silk Loungewear Robe",
+      "slug": "earth-flora-silk-robe",
+      "category": "Loungewear",
+      "price": 42000,
+      "priceGBP": 26,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "LNG-EAR-005",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966228/ifemi-lifestyle/earth-flora-silk-robe.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966228/ifemi-lifestyle/earth-flora-silk-robe.jpg",
+        "/images/products/loungewear-1.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Terra Cotta",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Turquoise Flora",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "description": "Bespoke lightweight silk loungewear tunic, infused with artisanal floral crackle batik dye.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 5
+    },
+    {
+      "id": "prod-amethyst-silk-wrap-set",
+      "name": "Amethyst Silk Wrap Loungewear Set",
+      "slug": "amethyst-silk-wrap-set",
+      "category": "Loungewear",
+      "price": 46000,
+      "priceGBP": 29,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "LNG-AME-006",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966230/ifemi-lifestyle/amethyst-silk-wrap-set.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966230/ifemi-lifestyle/amethyst-silk-wrap-set.jpg",
+        "/images/products/loungewear-2.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Violet Plum",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Chartreuse",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "description": "Relaxed belted kimono robe in lustrous pure silk, tailored for elevated daytime living.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 21
+    },
+    {
+      "id": "prod-crimson-draped-kimono",
+      "name": "Crimson Draped Silk Kimono Dress",
+      "slug": "crimson-draped-kimono",
+      "category": "Loungewear",
+      "price": 58000,
+      "priceGBP": 36,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "LNG-CRI-007",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966231/ifemi-lifestyle/crimson-draped-kimono.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966231/ifemi-lifestyle/crimson-draped-kimono.jpg",
+        "/images/products/loungewear-3.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Crimson Red",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Midnight Navy",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "description": "Floor-skimming silk kimono dress featuring deep adire-inspired patterns and cinch tie.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 18
+    },
+    {
+      "id": "prod-monochrome-artisan-loungewear",
+      "name": "Monochrome Batik Loungewear Duo",
+      "slug": "monochrome-artisan-loungewear",
+      "category": "Loungewear",
+      "price": 45000,
+      "priceGBP": 28,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 12,
+      "threshold": 4,
+      "sku": "LNG-MON-008",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966233/ifemi-lifestyle/monochrome-artisan-loungewear.jpg",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788966233/ifemi-lifestyle/monochrome-artisan-loungewear.jpg",
+        "/images/products/loungewear-4.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Monochrome Black",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Ecru White",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        }
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "description": "Bold calligraphic graphic loungewear piece crafted in flowing washed silk with contrast piping.",
+      "fabricCare": "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+      "isPublished": true,
+      "isFeatured": true,
+      "salesCount": 23
     },
     {
       "id": "5",
@@ -61,6 +348,43 @@
       "isPublished": true,
       "isFeatured": true,
       "salesCount": 34
+    },
+    {
+      "id": "prod-1788963096074",
+      "name": "gsjs",
+      "slug": "gsjs",
+      "category": "Kaftans",
+      "price": 45000,
+      "priceGBP": 28,
+      "salePrice": null,
+      "salePriceGBP": null,
+      "stock": 15,
+      "threshold": 5,
+      "sku": "KAFTAN-BLU-614",
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png",
+      "images": [
+        "https://res.cloudinary.com/wugtledv/image/upload/v1788963089/ifemi-lifestyle/ogbcqbub3hhinrqarbiy.png"
+      ],
+      "colors": [
+        {
+          "name": "Midnight Navy",
+          "hex": "#0B132B",
+          "bgClass": "bg-[#0B132B]"
+        },
+        {
+          "name": "Royal Purple",
+          "hex": "#4B2E83",
+          "bgClass": "bg-[#4B2E83]"
+        }
+      ],
+      "sizes": [
+        "One Size (Fluid Drape)"
+      ],
+      "description": "Crafted with premium natural fibres and fluid drape.",
+      "fabricCare": "Gentle care recommended.",
+      "isPublished": true,
+      "isFeatured": false,
+      "salesCount": 1
     }
   ],
   "orders": [
@@ -176,8 +500,8 @@
       "id": "cat-1",
       "name": "Kaftans",
       "slug": "kaftans",
-      "image": "",
-      "productsCount": 1,
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg",
+      "productsCount": 5,
       "featured": true
     },
     {
@@ -192,8 +516,8 @@
       "id": "cat-3",
       "name": "Loungewear",
       "slug": "loungewear",
-      "image": "",
-      "productsCount": 0,
+      "image": "https://res.cloudinary.com/wugtledv/image/upload/v1788966228/ifemi-lifestyle/earth-flora-silk-robe.jpg",
+      "productsCount": 4,
       "featured": true
     },
     {
@@ -221,5 +545,5 @@
       "featured": false
     }
   ],
-  "updatedAt": "2026-09-09T14:35:56.859Z"
+  "updatedAt": "2026-09-09T15:05:03.519Z"
 }

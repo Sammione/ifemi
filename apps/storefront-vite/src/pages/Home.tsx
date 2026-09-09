@@ -18,20 +18,20 @@ export default function Home() {
     {
       name: 'Kaftans',
       slug: 'kaftans',
-      image: '',
-      count: 'Collection'
+      image: '/images/products/kaftan-1.jpg',
+      count: '5 Pieces'
     },
     {
       name: 'Trouser Sets',
       slug: 'trouser-sets',
       image: '',
-      count: 'Collection'
+      count: 'Atelier'
     },
     {
       name: 'Loungewear',
       slug: 'loungewear',
-      image: '',
-      count: 'Collection'
+      image: '/images/products/loungewear-2.jpg',
+      count: '4 Pieces'
     },
     {
       name: 'Diffusers & Scents',
@@ -130,8 +130,8 @@ export default function Home() {
           <div className="lg:col-span-7 order-1 lg:order-2">
             <div className="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/3] overflow-hidden bg-stone-100">
               <img
-                src="/images/products/diffuser-1.jpg"
-                alt="Artisanal Diffuser"
+                src="/images/products/loungewear-3.jpg"
+                alt="Ifẹ́mi Silk Kimono Dress"
                 className="w-full h-full object-cover object-center filter contrast-[1.02]"
               />
             </div>
@@ -247,15 +247,15 @@ export default function Home() {
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="aspect-[3/4] bg-stone-100 overflow-hidden">
               <img
-                src="/images/products/diffuser-1.jpg"
-                alt="Artisanal Diffuser"
+                src="/images/products/kaftan-2.jpg"
+                alt="Emerald Geometric Silk Kaftan"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="aspect-[3/4] bg-stone-100 overflow-hidden mt-8">
               <img
-                src="/images/products/diffuser-2.jpg"
-                alt="Detail of scent"
+                src="/images/products/loungewear-2.jpg"
+                alt="Amethyst Silk Wrap Set"
                 className="w-full h-full object-cover"
               />
             </div>

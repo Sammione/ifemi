@@ -22,7 +22,7 @@ const categoryData: Record<string, CategoryMeta> = {
   kaftans: {
     name: "Kaftans",
     description: "Flowing silhouettes in natural silk blends designed for fluid movement and ease.",
-    image: "",
+    image: "/images/products/kaftan-1.jpg",
     items: []
   },
   "trouser-sets": {
@@ -36,7 +36,7 @@ const categoryData: Record<string, CategoryMeta> = {
     name: "Loungewear",
     description: "Lightweight washed silk loungewear tailored for relaxed daytime elegance.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    image: "",
+    image: "/images/products/loungewear-2.jpg",
     items: []
   },
   diffusers: {

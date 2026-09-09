@@ -5,22 +5,22 @@ const categories = [
     name: "Kaftans",
     slug: "kaftans",
     description: "Flowing silhouettes in natural silk blends designed for fluid movement and comfort.",
-    count: "Collection",
-    image: ""
+    count: "5 Pieces",
+    image: "/images/products/kaftan-1.jpg"
   },
   {
     name: "Trouser Sets",
     slug: "trouser-sets",
     description: "Coordinated two-piece ensembles with high-waisted tailored trousers and crossover blouses.",
-    count: "Collection",
+    count: "Atelier",
     image: ""
   },
   {
     name: "Loungewear",
     slug: "loungewear",
     description: "Featherweight washed silk loungewear tailored for relaxed elegance.",
-    count: "Collection",
-    image: ""
+    count: "4 Pieces",
+    image: "/images/products/loungewear-2.jpg"
   },
   {
     name: "Diffusers",

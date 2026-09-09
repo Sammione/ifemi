@@ -77,8 +77,232 @@ export interface CategoryRecord {
   featured?: boolean;
 }
 
-// Default luxury catalog — only authentic diffusers and user products
+// Default luxury catalog — authentic kaftans, loungewear, diffusers
 const defaultProducts: ProductRecord[] = [
+  {
+    id: "prod-ikat-silk-kaftan",
+    name: "Ikat Motif Silk Kaftan",
+    slug: "ikat-silk-kaftan",
+    category: "Kaftans",
+    price: 52000,
+    priceGBP: 32,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 12,
+    threshold: 4,
+    sku: "KAFTAN-IKA-001",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg",
+      "/images/products/kaftan-1.jpg"
+    ],
+    colors: [{ name: "Ruby & Gold", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["One Size (Fluid Drape)"],
+    description: "Handcrafted fluid silk kaftan featuring an intricate African ikat pattern with wide kimono drape.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 18
+  },
+  {
+    id: "prod-emerald-geometric-kaftan",
+    name: "Emerald Geometric Silk Kaftan",
+    slug: "emerald-geometric-kaftan",
+    category: "Kaftans",
+    price: 54000,
+    priceGBP: 34,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 10,
+    threshold: 4,
+    sku: "KAFTAN-EME-002",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966223/ifemi-lifestyle/emerald-geometric-kaftan.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966223/ifemi-lifestyle/emerald-geometric-kaftan.jpg",
+      "/images/products/kaftan-2.jpg"
+    ],
+    colors: [{ name: "Emerald Green", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["One Size (Fluid Drape)"],
+    description: "Striking geometric batik pattern on premium silk blend, designed for fluid movement and comfort.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 22
+  },
+  {
+    id: "prod-burgundy-batik-kaftan",
+    name: "Burgundy Batik Silhouette Kaftan",
+    slug: "burgundy-batik-kaftan",
+    category: "Kaftans",
+    price: 48000,
+    priceGBP: 30,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 14,
+    threshold: 4,
+    sku: "KAFTAN-BUR-003",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966225/ifemi-lifestyle/burgundy-batik-kaftan.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966225/ifemi-lifestyle/burgundy-batik-kaftan.jpg",
+      "/images/products/kaftan-3.jpg"
+    ],
+    colors: [{ name: "Burgundy", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["One Size (Fluid Drape)"],
+    description: "Ceremonial silk kaftan with rich organic batik motifs, hand-dyed in warm earth tones.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 15
+  },
+  {
+    id: "prod-magenta-mosaic-kaftan",
+    name: "Mosaic Prism Silk Kaftan",
+    slug: "magenta-mosaic-kaftan",
+    category: "Kaftans",
+    price: 55000,
+    priceGBP: 35,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 8,
+    threshold: 3,
+    sku: "KAFTAN-MAG-004",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966226/ifemi-lifestyle/magenta-mosaic-kaftan.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966226/ifemi-lifestyle/magenta-mosaic-kaftan.jpg",
+      "/images/products/kaftan-4.jpg"
+    ],
+    colors: [{ name: "Royal Blue & Magenta", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["One Size (Fluid Drape)"],
+    description: "Vibrant stained-glass mosaic silk print with signature open neckline and fluid side drapes.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 19
+  },
+  {
+    id: "prod-earth-flora-silk-robe",
+    name: "Earth Flora Silk Loungewear Robe",
+    slug: "earth-flora-silk-robe",
+    category: "Loungewear",
+    price: 42000,
+    priceGBP: 26,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 12,
+    threshold: 4,
+    sku: "LNG-EAR-005",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966228/ifemi-lifestyle/earth-flora-silk-robe.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966228/ifemi-lifestyle/earth-flora-silk-robe.jpg",
+      "/images/products/loungewear-1.jpg"
+    ],
+    colors: [{ name: "Terra Cotta", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["S", "M", "L", "XL"],
+    description: "Bespoke lightweight silk loungewear tunic, infused with artisanal floral crackle batik dye.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 14
+  },
+  {
+    id: "prod-amethyst-silk-wrap-set",
+    name: "Amethyst Silk Wrap Loungewear Set",
+    slug: "amethyst-silk-wrap-set",
+    category: "Loungewear",
+    price: 46000,
+    priceGBP: 29,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 9,
+    threshold: 3,
+    sku: "LNG-AME-006",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966230/ifemi-lifestyle/amethyst-silk-wrap-set.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966230/ifemi-lifestyle/amethyst-silk-wrap-set.jpg",
+      "/images/products/loungewear-2.jpg"
+    ],
+    colors: [{ name: "Violet Plum", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["S", "M", "L", "XL"],
+    description: "Relaxed belted kimono robe in lustrous pure silk, tailored for elevated daytime living.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 26
+  },
+  {
+    id: "prod-crimson-draped-kimono",
+    name: "Crimson Draped Silk Kimono Dress",
+    slug: "crimson-draped-kimono",
+    category: "Loungewear",
+    price: 58000,
+    priceGBP: 36,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 7,
+    threshold: 3,
+    sku: "LNG-CRI-007",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966231/ifemi-lifestyle/crimson-draped-kimono.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966231/ifemi-lifestyle/crimson-draped-kimono.jpg",
+      "/images/products/loungewear-3.jpg"
+    ],
+    colors: [{ name: "Crimson Red", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["S", "M", "L", "XL"],
+    description: "Floor-skimming silk kimono dress featuring deep adire-inspired patterns and cinch tie.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 21
+  },
+  {
+    id: "prod-monochrome-artisan-loungewear",
+    name: "Monochrome Batik Loungewear Duo",
+    slug: "monochrome-artisan-loungewear",
+    category: "Loungewear",
+    price: 45000,
+    priceGBP: 28,
+    salePrice: null,
+    salePriceGBP: null,
+    stock: 11,
+    threshold: 4,
+    sku: "LNG-MON-008",
+    image: "https://res.cloudinary.com/wugtledv/image/upload/v1788966233/ifemi-lifestyle/monochrome-artisan-loungewear.jpg",
+    images: [
+      "https://res.cloudinary.com/wugtledv/image/upload/v1788966233/ifemi-lifestyle/monochrome-artisan-loungewear.jpg",
+      "/images/products/loungewear-4.jpg"
+    ],
+    colors: [{ name: "Monochrome Black", hex: "#0B132B", bgClass: "bg-[#0B132B]" }],
+    sizes: ["S", "M", "L", "XL"],
+    description: "Bold calligraphic graphic loungewear piece crafted in flowing washed silk with contrast piping.",
+    fabricCare: "100% Washed Silk Blend. Dry clean or gentle hand wash cold.",
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 17
+  },
+  {
+    id: '5',
+    name: 'Amber & Oud Diffuser',
+    slug: 'amber-oud-diffuser',
+    price: 22000,
+    priceGBP: 15,
+    category: 'Diffusers',
+    image: '/images/products/diffuser-1.jpg',
+    images: ['/images/products/diffuser-1.jpg', '/images/products/diffuser-2.jpg'],
+    isOneSize: true,
+    stock: 16,
+    threshold: 5,
+    sku: 'DIF-OUD-005',
+    origin: 'Hand-blended in Lagos',
+    sizes: ['200ml Glass Decanter'],
+    colors: [
+      { name: 'Amber Glass', hex: '#78350F', bgClass: 'bg-[#78350F]' }
+    ],
+    description: 'Cedarwood, agarwood, and amber resin in custom decanter with reed sticks.',
+    fabricCare: 'Keep away from direct sunlight.',
+    isPublished: true,
+    isFeatured: true,
+    salesCount: 34
+  },
   {
     name: "gsjs",
     slug: "gsjs",
@@ -104,33 +328,9 @@ const defaultProducts: ProductRecord[] = [
     description: "Crafted with premium natural fibres and fluid drape.",
     fabricCare: "Gentle care recommended.",
     isPublished: true,
-    isFeatured: true,
+    isFeatured: false,
     id: "prod-1788963096074",
     salesCount: 1
-  },
-  {
-    id: '5',
-    name: 'Amber & Oud Diffuser',
-    slug: 'amber-oud-diffuser',
-    price: 22000,
-    priceGBP: 15,
-    category: 'Diffusers',
-    image: '/images/products/diffuser-1.jpg',
-    images: ['/images/products/diffuser-1.jpg', '/images/products/diffuser-2.jpg'],
-    isOneSize: true,
-    stock: 16,
-    threshold: 5,
-    sku: 'DIF-OUD-005',
-    origin: 'Hand-blended in Lagos',
-    sizes: ['200ml Glass Decanter'],
-    colors: [
-      { name: 'Amber Glass', hex: '#78350F', bgClass: 'bg-[#78350F]' }
-    ],
-    description: 'Cedarwood, agarwood, and amber resin in custom decanter with reed sticks.',
-    fabricCare: 'Keep away from direct sunlight.',
-    isPublished: true,
-    isFeatured: true,
-    salesCount: 34
   }
 ];
 
@@ -174,9 +374,9 @@ const defaultOrders: OrderRecord[] = [
 ];
 
 const defaultCategories: CategoryRecord[] = [
-  { id: 'cat-1', name: 'Kaftans', slug: 'kaftans', image: '', productsCount: 1, featured: true },
+  { id: 'cat-1', name: 'Kaftans', slug: 'kaftans', image: 'https://res.cloudinary.com/wugtledv/image/upload/v1788966222/ifemi-lifestyle/ikat-silk-kaftan.jpg', productsCount: 5, featured: true },
   { id: 'cat-2', name: 'Trouser Sets', slug: 'trouser-sets', image: '', productsCount: 0, featured: true },
-  { id: 'cat-3', name: 'Loungewear', slug: 'loungewear', image: '', productsCount: 0, featured: true },
+  { id: 'cat-3', name: 'Loungewear', slug: 'loungewear', image: 'https://res.cloudinary.com/wugtledv/image/upload/v1788966230/ifemi-lifestyle/amethyst-silk-wrap-set.jpg', productsCount: 4, featured: true },
   { id: 'cat-4', name: 'Cushions', slug: 'cushions', image: '', productsCount: 0, featured: false },
   { id: 'cat-5', name: 'Diffusers', slug: 'diffusers', image: '/images/products/diffuser-1.jpg', productsCount: 1, featured: true },
   { id: 'cat-6', name: 'Jewellery', slug: 'jewellery', image: '', productsCount: 0, featured: false }
