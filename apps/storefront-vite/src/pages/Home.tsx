@@ -105,7 +105,7 @@ export default function Home() {
               Collection 2026
             </span>
             <h1 className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.15] text-[var(--color-brand-navy)] mb-6">
-              Fluid Silhouettes, Tailored Grace.
+              Ifẹ́mi Lifestyle: Embrace Your Love for Yourself
             </h1>
             <p className="text-stone-600 text-sm md:text-base font-light leading-relaxed mb-8 max-w-md">
               Contemporary garments and living objects designed for ease, movement, and enduring elegance.
@@ -262,23 +262,26 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-6 lg:pl-8">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-3">
-              Craft &amp; Silhouette
+            <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-brand-muted)] block mb-3 font-semibold">
+              Brand Concept &amp; Mission
             </span>
             <h2 className="font-playfair text-3xl md:text-4xl font-normal text-[var(--color-brand-navy)] leading-tight mb-6">
-              Thoughtfully proportioned for effortless daily wear.
+              Embrace Your Love for Yourself.
             </h2>
+            <p className="text-stone-600 font-light text-sm md:text-base leading-relaxed mb-4">
+              <strong className="font-medium text-stone-900">Ifemi Lifestyle</strong>, meaning <em>“My love”</em> in Yoruba, celebrates self-love and the importance of nurturing oneself. The brand offers a curated selection of products and services that embody love, care, and wellness — including soothing diffusers, stylish clothing, calming candles, beautiful homeware, and unique artwork.
+            </p>
             <p className="text-stone-600 font-light text-sm md:text-base leading-relaxed mb-6">
-              Our designs focus on breathability, clean movement, and tactile luxury. Each kaftan is cut to drape naturally across diverse silhouettes, while our home objects are hand-blended with natural botanicals.
+              Our mission is to inspire individuals to embrace their unique journeys of self-love and wellness, fostering a welcoming community where you feel valued and empowered to prioritise your mental, emotional, and physical health.
             </p>
             <div className="grid grid-cols-2 gap-6 pt-4 border-t border-stone-200">
               <div>
-                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Pure Fibres</h4>
-                <p className="text-xs text-stone-500 font-light">Mulberry silk, woven African cotton, and fluid crepes.</p>
+                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Curated Care</h4>
+                <p className="text-xs text-stone-500 font-light">Diffusers, candles, fluid kaftans &amp; artful homeware.</p>
               </div>
               <div>
-                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Fluid Sizing</h4>
-                <p className="text-xs text-stone-500 font-light">One-size draping tailored to flatter comfortably.</p>
+                <h4 className="text-xs uppercase tracking-widest font-semibold text-stone-900 mb-1">Wellness Services</h4>
+                <p className="text-xs text-stone-500 font-light">Guided workshops &amp; seminars for holistic well-being.</p>
               </div>
             </div>
             <div className="mt-8">
@@ -286,7 +289,7 @@ export default function Home() {
                 to="/about"
                 className="text-xs uppercase tracking-[0.2em] font-medium text-stone-900 hover:text-stone-500 transition-colors inline-flex items-center gap-2 underline underline-offset-4"
               >
-                <span>Read About Our Process</span>
+                <span>Read Full Story &amp; Mission</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

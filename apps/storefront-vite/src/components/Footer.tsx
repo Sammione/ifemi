@@ -23,8 +23,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           <div className="lg:col-span-5 flex flex-col items-start">
             <Logo light className="mb-6" />
-            <p className="text-white/60 font-light text-xs leading-relaxed max-w-sm">
-              Contemporary African luxury fashion and living objects. Crafted in limited quantities with natural fibres, tailored precision, and quiet elegance.
+            <p className="text-white/70 font-light text-xs leading-relaxed max-w-sm">
+              Ifẹ́mi Lifestyle, meaning “My love” in Yoruba, celebrates self-love and nurturing oneself through soothing diffusers, stylish clothing, calming candles, beautiful homeware, unique artwork, and holistic wellness.
             </p>
           </div>
 

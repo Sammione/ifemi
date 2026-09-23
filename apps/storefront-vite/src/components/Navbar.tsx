@@ -6,7 +6,6 @@ import Logo from './Logo';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
-import { useCurrency } from '../context/CurrencyContext';
 
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -19,7 +18,6 @@ export default function Navbar() {
   const { totalItems } = useCart();
   const { totalWishlistItems } = useWishlist();
   const { isAuthenticated, user } = useAuth();
-  const { currency, setCurrency } = useCurrency();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,31 +39,10 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Editorial Announcement & Currency Bar */}
-      <div className="w-full bg-[var(--color-brand-navy)] text-white/80 text-[10px] tracking-[0.18em] uppercase py-2 px-6 md:px-12 fixed top-0 z-50 flex items-center justify-between border-b border-white/10">
-        <div className="text-[9px] md:text-[10px] tracking-widest font-normal text-stone-300">
+      {/* Editorial Announcement Bar */}
+      <div className="w-full h-8 bg-[var(--color-brand-navy)] text-white/80 text-[10px] tracking-[0.18em] uppercase px-6 md:px-12 fixed top-0 z-50 flex items-center justify-between border-b border-white/10 overflow-hidden">
+        <div className="text-[9px] md:text-[10px] tracking-widest font-normal text-stone-300 truncate whitespace-nowrap">
           Complimentary Delivery in Nigeria &amp; the United Kingdom
-        </div>
-        <div className="flex items-center gap-1.5 text-[9px] tracking-widest font-medium">
-          <button
-            onClick={() => setCurrency('NGN')}
-            className={`px-2 py-0.5 transition-colors ${
-              currency === 'NGN' ? 'text-white font-semibold underline underline-offset-4' : 'text-stone-400 hover:text-white'
-            }`}
-            title="Nigerian Naira"
-          >
-            NGN (₦)
-          </button>
-          <span className="text-stone-600">/</span>
-          <button
-            onClick={() => setCurrency('GBP')}
-            className={`px-2 py-0.5 transition-colors ${
-              currency === 'GBP' ? 'text-white font-semibold underline underline-offset-4' : 'text-stone-400 hover:text-white'
-            }`}
-            title="British Pound"
-          >
-            GBP (£)
-          </button>
         </div>
       </div>
 
